@@ -60,7 +60,7 @@ export default class Navbar extends React.Component {
         <Nav>
           <Logo to="/">FMON</Logo>
           <LinksWrapper>
-            <MenuLink to="/">Ínicio</MenuLink>
+            <MenuLink to="/">Home</MenuLink>
             <MenuLink to="/championships">Championships</MenuLink>
             <MenuLink to="/ultimate">Ultimate</MenuLink>
             <MenuLink to="/ladder">Ladder</MenuLink>
