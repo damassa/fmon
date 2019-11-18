@@ -11,6 +11,11 @@ html, input, button {
   font-family: 'Open Sans', sans-serif;
 }
 
+html, body, #root {
+  width: 100vw;
+  overflow-x: hidden;
+}
+
 
 /*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
 
