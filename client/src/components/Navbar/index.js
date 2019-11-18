@@ -22,6 +22,7 @@ const Nav = styled.div`
   background-color: transparent;
   z-index: 2;
   transition: 0.75s;
+  color: #fff;
 `
 
 const FakeSpace = styled.div`
@@ -107,6 +108,7 @@ const Notification = styled.div`
   background-position: center;
   background-size: contain;
   background-repeat: no-repeat;
+  filter: invert(100%);
 `
 
 const User = styled.div`
@@ -123,6 +125,7 @@ const UserIcon = styled.div`
   background-position: center;
   background-size: contain;
   background-repeat: no-repeat;
+  filter: invert(100%);
 `
 
 const UserTextWrapper = styled.div`
@@ -157,6 +160,7 @@ const MenuMobileIcon = styled.div`
   background-position: center;
   background-size: contain;
   background-repeat: no-repeat;
+  filter: invert(100%);
 
   @media only screen and (max-width: 850px) {
     display: flex;
