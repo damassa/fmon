@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 import LogoImg from '../../assets/logo.png';
@@ -79,13 +79,25 @@ export const LinksWrapper = styled.div`
 `
 
 export const MenuLink = styled(NavLink)`
-  position:relative;
+  position: relative;
+  display: flex;
+  align-items: center;
   margin: 0 10px;
   font-size: 18px;
   font-weight: bold;
   border: 0;
   transition: color 0.25s;
   transition: all 0.5s;
+`
+
+export const MenuLinkIcon = styled.div`
+  width: 10px;
+  height: 10px;
+  margin-left: 5px;
+  background-image: url(${props => props.icon});
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
 `
 
 export const MenuUser = styled.div`
@@ -111,7 +123,7 @@ export const Notification = styled.div`
 
 export const User = styled.div`
   display: flex;
-  flex-flow: row nowrap;
+  flex-flow: column nowrap;
   align-items: center;
   cursor: pointer;
 `
@@ -190,7 +202,9 @@ export const MenuMobile = styled.div`
 
 export const MenuLinkWrapper = styled.div`
   display: flex;
+  justify-content: center;
   flex-flow: column nowrap;
+  height: 75px;
 `
 
 export const MenuLinkExpansive = styled.div`
@@ -199,7 +213,7 @@ export const MenuLinkExpansive = styled.div`
   flex-flow: column nowrap;
   align-items: center;
   width: 150px;
-  margin-top: 40px;
+  margin-top: 162px;
   background-color: var(--color-1);
   box-shadow: 0px 10px 10px 0px rgba(0,0,0,0.25);
 
@@ -225,5 +239,46 @@ export const MenuLinkHover = styled(MenuLink)`
   
   &:hover {
     background-color: #00000055;
+  }
+`
+
+export const UserInfos = styled.div`
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+`
+
+export const UserLogin = styled.div`
+  position: absolute;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  width: 200px;
+  margin-top: 75px;
+  padding: 1vh 0;
+  background-color: var(--color-1);
+  box-shadow: 0px 10px 10px 0px rgba(0,0,0,0.25);
+  cursor: default;
+
+  &::after {
+    position: absolute;
+    content: "";
+    width: 0;
+    height: 0;
+    top: -15px;
+    border-style: solid;
+    border-width: 0 15px 15px 15px;
+    border-color: transparent transparent var(--color-1) transparent;
+  }
+`
+
+export const LoginText = styled(Link)`
+  font-size: 12px;
+  margin: 1vh 0;
+  transition: 0.5s;
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: underline;
   }
 `

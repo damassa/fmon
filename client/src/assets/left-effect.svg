@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="356.776" height="753.236" viewBox="0 0 356.776 753.236" id="_mzg5vsa3h">
+  <defs>
+    <linearGradient id="newsBannerFrillsLeft" x1="0.5" x2="0.5" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#fffd5e"></stop>
+      <stop offset="1" stop-color="#ffca0e"></stop>
+    </linearGradient>
+    <linearGradient id="newsBannerFrillsLeft-2" x1="0.5" x2="0.5" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#019ab6"></stop>
+      <stop offset="1" stop-color="#6dffe6"></stop>
+    </linearGradient>
+  </defs>
+  <g transform="translate(170.408 -63.65)">
+    <path d="M22.449,272.018l1.159-3.582H58.123l-1.16,3.582Zm4.389-13.559,1.316-4.063H97.181l-1.315,4.063ZM31.227,244.9l1.471-4.543H67.212L65.741,244.9Zm4.388-13.559,1.627-5.025h69.028l-1.625,5.025Zm4.39-13.56,1.782-5.5H76.3l-1.781,5.5ZM44.4,204.22l1.937-5.985h69.029l-1.938,5.985Zm4.389-13.559,2.093-6.466H85.391L83.3,190.661ZM53.174,177.1l2.248-6.947h69.029L122.2,177.1Zm4.389-13.56,2.4-7.426H94.482l-2.4,7.426Zm4.389-13.559,2.56-7.907H133.54l-2.56,7.907Zm4.389-13.56,2.715-8.387h34.514l-2.715,8.387Zm4.388-13.558,2.871-8.869H142.63l-2.871,8.869Zm4.39-13.56,3.026-9.349H112.66l-3.026,9.349ZM79.51,95.743l3.181-9.83h69.028l-3.182,9.83ZM83.9,82.184l3.337-10.31H121.75l-3.337,10.31Zm4.388-13.559L91.78,57.832h69.03l-3.493,10.792Zm4.39-13.56,3.649-11.271H130.84l-3.649,11.271ZM97.067,41.5l3.8-11.751H169.9L166.1,41.5Zm4.389-13.559,3.959-12.233h34.514L135.97,27.945ZM106,13.9,110.5,0H179.53l-4.5,13.9Z" transform="translate(6.838 63.65)" fill="url(#newsBannerFrillsLeft)"></path>
+
+    <path class="animate-to" data-animation-id="1" d="M634.516,735.854H605.245L748.49,294.99h29.272Zm-15.338-10.516h8.238L763.829,305.507H755.59Z" transform="translate(-706.653 -135.967)" fill="url(#newsBannerFrillsLeft-2)"></path>
+    <path class="animate-from" data-animation-id="1" d="M634.51 735.85 C624.75 735.85 615 735.85 605.24 735.85 652.99 588.89 700.74 441.94 748.49 294.99 758.24 294.99 768 294.99 777.76 294.99 730.01 441.94 682.26 588.89 634.51 735.85 M619.17 725.33 C621.92 725.33 624.66 725.33 627.41 725.33 672.88 585.39 718.35 445.45 763.82 305.5 761.08 305.5 758.33 305.5 755.59 305.5 710.11 445.45 664.64 585.39 619.17 725.33 " transform="matrix(1,0,0,1,-706.6530151367188,-135.9669952392578)" fill="url(#newsBannerFrillsLeft-2)" data-original="M634.516,735.854H605.245L748.49,294.99h29.272Zm-15.338-10.516h8.238L763.829,305.507H755.59Z" data-svg-origin="605.2449951171875 294.989990234375" style="opacity: 1; visibility: visible;"></path>
+  </g>
+</svg>

@@ -1,12 +1,15 @@
 import React from 'react';
 import { TimelineLite } from "gsap/all";
 
+import ArrowDown from '../../assets/icons/arrow-down.svg';
+
 import {
     LinksWrapper, 
     MenuLink,
     MenuLinkExpansive,
     MenuLinkHover,
-    MenuLinkWrapper
+    MenuLinkWrapper,
+    MenuLinkIcon
 } from './style';
 
 export default class MenuLinks extends React.Component {
@@ -21,25 +24,21 @@ export default class MenuLinks extends React.Component {
     componentDidMount() {          
         this.menuExpansiveAnimation
         .from(this.menuExpansive, 0.5, { autoAlpha: 0 })
-      }
+    }
 
     render() {
         return (
             <LinksWrapper>
-                <MenuLink to="/">Home</MenuLink>
-                <MenuLinkWrapper>
-                    <MenuLink 
-                        to="/championships" 
-                        onMouseOver={() => this.menuExpansiveAnimation.play()}
-                        onMouseLeave={() => this.menuExpansiveAnimation.reverse()}
-                    >
-                        Championships
+                <MenuLink to="/">Ínicio</MenuLink>
+                <MenuLinkWrapper
+                    onMouseOver={() => this.menuExpansiveAnimation.play()}
+                    onMouseLeave={() => this.menuExpansiveAnimation.reverse()}
+                >
+                    <MenuLink to="/championships">
+                        Campeonatos
+                        <MenuLinkIcon icon={ArrowDown} />
                     </MenuLink>
-                    <MenuLinkExpansive 
-                        ref={div => this.menuExpansive = div}
-                        onMouseOver={() => this.menuExpansiveAnimation.play()}
-                        onMouseLeave={() => this.menuExpansiveAnimation.reverse()}
-                    > 
+                    <MenuLinkExpansive ref={div => this.menuExpansive = div}> 
                         <MenuLinkHover to="/championships/bhm">BHM</MenuLinkHover>
                         <MenuLinkHover to="/championships/cbfm">CBFM</MenuLinkHover>
                         <MenuLinkHover to="/championships/fmb">FMB</MenuLinkHover>
@@ -51,8 +50,8 @@ export default class MenuLinks extends React.Component {
                     </MenuLinkExpansive>
                 </MenuLinkWrapper>
                 <MenuLink to="/ultimate">Ultimate</MenuLink>
-                <MenuLink to="/ladder">Ladder</MenuLink>
-                <MenuLink to="/store">Store</MenuLink>
+                <MenuLink to="/ladder">Notícias</MenuLink>
+                <MenuLink to="/store">Loja</MenuLink>
             </LinksWrapper>
         )
     }

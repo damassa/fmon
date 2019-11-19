@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="486.778" height="1005.038" viewBox="0 0 486.778 1005.038" id="_lon1gqzmj">
+  <defs>
+    <linearGradient id="newsBannerFrillsRight" x1="0.5" x2="0.5" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#0199b5"></stop>
+      <stop offset="1" stop-color="#6dffe6"></stop>
+    </linearGradient>
+    <linearGradient id="newsBannerFrillsRight-2" x1="0.5" x2="0.5" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#fffd5e"></stop>
+      <stop offset="1" stop-color="#ffca0e"></stop>
+    </linearGradient>
+    <linearGradient id="newsBannerFrillsRight-3" x1="0.5" x2="0.5" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#019ab6"></stop>
+      <stop offset="1" stop-color="#6dffe6"></stop>
+    </linearGradient>
+  </defs>
+  <g transform="translate(-1592.65 496.607)">
+    <path d="M0,295.878l2.557-7.853H44.346l-2.557,7.853Zm8.234-25.288,2.849-8.749H52.872l-2.849,8.749ZM16.468,245.3l3.14-9.646H61.4L58.257,245.3ZM24.7,220.015l3.433-10.541H69.923l-3.432,10.541Zm8.234-25.288,3.725-11.439H78.448l-3.725,11.439Zm8.234-25.289L45.185,157.1H86.973l-4.015,12.334ZM49.4,144.15l4.308-13.23H95.5l-4.308,13.23Zm8.233-25.288,4.6-14.127h41.789l-4.6,14.127ZM65.87,93.575l4.891-15.022H112.55l-4.891,15.022ZM74.1,68.287l5.183-15.918h41.79l-5.184,15.918ZM82.338,43l5.474-16.816H129.6L124.127,43ZM90.571,17.71,96.338,0h41.789L132.36,17.71Z" transform="translate(1592.65 0.34)" fill="url(#newsBannerFrillsRight-2)"></path>
+    <path d="M17.573,140.832,63.4,0H75.011L29.161,140.832H17.573Z" transform="translate(1801.965 205)" stroke="rgba(0,0,0,0)" stroke-width="1" fill="url(#newsBannerFrillsRight-2)"></path>
+
+    <path class="animate-to" data-animation-id="1" d="M0,142,22.025,74.691H58.768L36.743,142ZM24.442,67.305,46.467,0H83.21L61.185,67.305Z" transform="translate(1830.182 258)" stroke="rgba(0,0,0,0)" stroke-width="1" fill="url(#newsBannerFrillsRight)"></path>
+    <path class="animate-to" data-animation-id="2" d="M638.512,796.029H605.245l162.8-501.039H801.31Zm-17.431-11.952h9.362L785.474,306.943h-9.363Z" transform="translate(1114.118 -287.597)" fill="url(#newsBannerFrillsRight-3)"></path>
+    <path class="animate-to" data-animation-id="3" d="M60.941,444.334,205.146,0h5.695L66.632,444.343Zm-10.3.008L194.85,0h5.411L56.052,444.343Zm-9.462,0L185.386,0h5.157L46.333,444.343ZM0,444.343,144.208,0h37.45L37.449,444.343Z" transform="translate(1624.102 -60.596)" fill="url(#newsBannerFrillsRight-3)"></path>
+    <path class="animate-from" data-animation-id="1" d="M0,142,22.025,74.691H58.768L36.743,142ZM24.442,67.305,46.467,0H83.21L61.185,67.305Z" transform="matrix(1,0,0,1,1830.1820068359375,258)" stroke="rgba(0,0,0,0)" stroke-width="1" fill="url(#newsBannerFrillsRight)" data-original="M0,142,22.026,74.69h.743L.743,142Zm24.442-74.69L46.467,0h.742L25.185,67.306Z" data-svg-origin="0 0" style="opacity: 1; visibility: visible;"></path>
+    <path class="animate-from" data-animation-id="2" d="M638.51 796.02 C627.42 796.02 616.33 796.02 605.24 796.02 659.51 629.01 713.77 462 768.04 294.99 779.13 294.99 790.22 294.99 801.31 294.99 747.04 462 692.77 629.01 638.51 796.02 M621.08 784.07 C624.2 784.07 627.32 784.07 630.44 784.07 682.11 625.03 733.79 465.98 785.47 306.94 782.35 306.94 779.23 306.94 776.11 306.94 724.43 465.98 672.75 625.03 621.08 784.07 " transform="matrix(1,0,0,1,1114.1180419921875,-287.59698486328125)" fill="url(#newsBannerFrillsRight-3)" data-original="M638.512,796.029H605.245l162.8-501.039H801.31Zm-17.431-11.952h9.362L785.474,306.943h-9.363Z" data-svg-origin="605.2449951171875 294.989990234375" style="opacity: 1; visibility: visible;"></path>
+    <path class="animate-from" data-animation-id="3" d="M0 444.34 C48.06 296.22 96.13 148.11 144.2 0 156.69 0 169.17 0 181.65 0 133.58 148.11 85.51 296.22 37.44 444.34 24.96 444.34 12.48 444.34 0 444.34 M60.94 444.33 C109 296.22 157.07 148.11 205.14 0 207.04 0 208.94 0 210.84 0 162.77 148.11 114.7 296.22 66.63 444.34 64.73 444.34 62.83 444.33 60.94 444.33 M50.64 444.34 C98.71 296.22 146.78 148.11 194.85 0 196.65 0 198.45 0 200.26 0 152.19 148.11 104.12 296.22 56.05 444.34 54.24 444.34 52.44 444.34 50.64 444.34 M41.17 444.34 C89.24 296.22 137.31 148.11 185.38 0 187.1 0 188.82 0 190.54 0 142.47 148.11 94.4 296.22 46.33 444.34 44.61 444.34 42.89 444.34 41.17 444.34 " transform="matrix(1,0,0,1,1624.10205078125,-60.59600067138672)" fill="url(#newsBannerFrillsRight-3)" data-original="M60.941,444.334,205.146,0h5.695L66.632,444.343Zm-10.3.008L194.85,0h5.411L56.052,444.343Zm-9.462,0L185.386,0h5.157L46.333,444.343ZM0,444.343,144.208,0h37.45L37.449,444.343Z" data-svg-origin="0 0" style="opacity: 1; visibility: visible;"></path>
+  </g>
+</svg>
