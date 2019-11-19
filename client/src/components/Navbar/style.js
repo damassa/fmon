@@ -52,7 +52,7 @@ export const Logo = styled(NavLink)`
     border: 0 solid transparent;
     border-bottom-width: 75px;
     border-top-width: 0px;
-    border-left: 25px solid #321450;
+    border-left: 25px solid var(--color-1);
   }
 
   @media only screen and (max-width: 300px) {
@@ -113,6 +113,7 @@ export const User = styled.div`
   display: flex;
   flex-flow: row nowrap;
   align-items: center;
+  cursor: pointer;
 `
 
 export const UserIcon = styled.div`
@@ -184,5 +185,45 @@ export const MenuMobile = styled.div`
 
   @media only screen and (max-width: 850px) {
     display: flex;
+  }
+`
+
+export const MenuLinkWrapper = styled.div`
+  display: flex;
+  flex-flow: column nowrap;
+`
+
+export const MenuLinkExpansive = styled.div`
+  position: absolute;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  width: 150px;
+  margin-top: 40px;
+  background-color: var(--color-1);
+  box-shadow: 0px 10px 10px 0px rgba(0,0,0,0.25);
+
+  &::after {
+    position: absolute;
+    content: "";
+    width: 0;
+    height: 0;
+    top: -15px;
+    border-style: solid;
+    border-width: 0 15px 15px 15px;
+    border-color: transparent transparent var(--color-1) transparent;
+  }
+`
+
+export const MenuLinkHover = styled(MenuLink)`
+  display: flex;
+  justify-content: center;
+  font-size: 16px;
+  padding: 1vh 0;
+  width: 100%;
+  cursor: pointer;
+  
+  &:hover {
+    background-color: #00000055;
   }
 `

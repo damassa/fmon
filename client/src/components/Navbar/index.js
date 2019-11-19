@@ -1,22 +1,17 @@
 import React from 'react';
 import { TimelineLite } from "gsap/all";
 
-import { Nav, 
+import { 
+  Nav, 
   Logo, 
-  LogoFake, 
-  LinksWrapper, 
-  MenuLink, 
-  MenuUser, 
-  Notification, 
-  User, 
-  UserIcon,
-  UserTextWrapper,
-  UserText,
-  UserSubText,
+  LogoFake,  
   MenuMobile,
   MenuMobileIcon,
-  FakeSpace
+  FakeSpace,
 } from './style';
+
+import MenuUser from './menuUser';
+import MenuLinks from './menuLinks';
 
 export default class Navbar extends React.Component {
   constructor(props){
@@ -33,7 +28,7 @@ export default class Navbar extends React.Component {
     open: false
   }
 
-  listenScrollEvent = e => {
+  listenScrollEvent = () => {
     if (window.scrollY > 10) {
       this.setState({backgroundColor: 'rgba(0,0,0,0.75)'})
       this.setState({boxShadow: '0px 5px 5px 0px rgba(0,0,0,0.25)'})
@@ -70,23 +65,8 @@ export default class Navbar extends React.Component {
         }}>
           <Logo to="/" />
           <LogoFake />
-          <LinksWrapper>
-            <MenuLink to="/">Home</MenuLink>
-            <MenuLink to="/championships">Championships</MenuLink>
-            <MenuLink to="/ultimate">Ultimate</MenuLink>
-            <MenuLink to="/ladder">Ladder</MenuLink>
-            <MenuLink to="/store">Store</MenuLink>
-          </LinksWrapper>
-          <MenuUser>
-            <Notification/>
-            <User>
-              <UserIcon />
-              <UserTextWrapper>
-                <UserText>Bem vindo,</UserText>
-                <UserSubText>Faça login ou Registre-se</UserSubText>
-              </UserTextWrapper>
-            </User>
-          </MenuUser>
+          <MenuLinks />
+          <MenuUser />
           <MenuMobileIcon onClick={() => this.handlerClick()}/>
         </Nav>
         <MenuMobile ref={div => this.menu = div}>
