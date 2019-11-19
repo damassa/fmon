@@ -3,17 +3,12 @@ const db = require('./database');
 require('dotenv').config();
 
 //Import routes
-const authRoutes = require('./components/auth/routes');
 const userRoutes = require('./components/user/routes');
 
 //App
 const app = express();
 
-//Routes middleware
-app.use("/api", authRoutes);
-app.use("/api", userRoutes);
-
-//Test databese
+//Connect Database
 db.connect(function(err){
   if(err) {
     console.log('Error connecting to Db: ', err);
@@ -22,11 +17,10 @@ db.connect(function(err){
   }
 });
 
-db.query('SHOW DATABASES', function(err, result) {
-  if (err) throw err;
-  console.log(result);
-});
+//Routes middleware
+app.use("/api", userRoutes);
 
+//Close DB connection
 db.end();
 
 //Running app
