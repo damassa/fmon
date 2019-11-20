@@ -1,5 +1,9 @@
 const express = require('express');
-const db = require('./database');
+const morgan = require('morgan');
+const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
+const cors = require('cors');
+
 require('dotenv').config();
 
 //Import routes
@@ -8,20 +12,14 @@ const userRoutes = require('./components/user/routes');
 //App
 const app = express();
 
-//Connect Database
-db.connect(function(err){
-  if(err) {
-    console.log('Error connecting to Db: ', err);
-  } else {
-    console.log('Connection established');
-  }
-});
+//Middlware
+app.use(morgan('dev'));
+app.use(bodyParser.json());
+app.use(cookieParser());
+app.use(cors());
 
 //Routes middleware
 app.use("/api", userRoutes);
-
-//Close DB connection
-db.end();
 
 //Running app
 const port = process.env.PORT || 4000;

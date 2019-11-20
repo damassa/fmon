@@ -1,7 +1,7 @@
 const mysql = require('mysql');
 require('dotenv').config();
   
-let db = mysql.createConnection({
+let connect = mysql.createConnection({
     host        : process.env.DB_HOST,
     port        : process.env.DB_PORT,
     database    : process.env.DB_DATABASE,
@@ -9,4 +9,11 @@ let db = mysql.createConnection({
     password    : process.env.DB_PASSWORD,
 });
 
-module.exports = db;
+// eslint-disable-next-line 
+if (connect.state != 'authenticated') {
+    connect.connect();
+}
+
+module.exports = {
+    connect: connect
+}
