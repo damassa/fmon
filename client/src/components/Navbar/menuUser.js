@@ -1,10 +1,11 @@
 import React from 'react';
 import { TimelineLite } from "gsap/all";
 
-import UserImage from '../../assets/icons/user.svg';
+import UserImage from '../../assets/icons/user-color.svg';
 import KeyImage from '../../assets/icons/key.svg';
 
-//import api from '../../services/api';
+import api from '../../services/api';
+import { login } from "../../services/auth";
 
 import {
     MenuUser as Wrapper, 
@@ -21,23 +22,75 @@ import {
   } from './style';
 import { ButtonSecondary, ButtonPrimary } from '../FormFields/button';
 import { InputIcon } from '../FormFields/input';
-import Modal from '../Modal';
+import { Alert } from '../FormFields/alert';
+import { 
+    ModalWrapper, 
+    Modal as ModalPage, 
+    CloseModal, 
+    CloseModalIcon, 
+    ModalTitle, 
+    ModalContent 
+} from '../Modal/style';
 
 export default class MenuUser extends React.Component {
     constructor(props){
         super(props);
+
+        this.state = {
+            name: "",
+            password: "",
+            error: ""
+        };
         
         this.menuUser = null;
-    
         this.menuUserAnimation = new TimelineLite({ paused: true });
+
+        this.modalWrapper = null;
+        this.modal = null;
+    
+        this.modalAnimation = new TimelineLite({ paused: true });
     }
 
-    componentDidMount() {          
+    componentDidMount() {
+        document.addEventListener("keydown", this.keyDownHandler.bind(this));
+
         this.menuUserAnimation
-        .from(this.menuUser, 0.5, { autoAlpha: 0 })
+            .from(this.menuUser, 0.5, { autoAlpha: 0 })
+
+        this.modalAnimation
+            .from(this.modalWrapper, 0.5, { autoAlpha: 0 })
+            .from(this.modal, 0.5, { bottom: 500, autoAlpha: 0})
     }
+
+    keyDownHandler = e => {
+		if ( e.keyCode === 27 ) this.modalAnimation.reverse();
+    }
+
+    handleSignIn = async e => {
+        e.preventDefault();
+        const { name, password } = this.state;
+        if (!name || !password) {
+          this.setState({ error: "Preencha o nome e senha para continuar!" });
+        } else {
+          try {
+            const response = await api.post("/user/signin", { name, password });
+            login(response.data.token);
+          } catch (err) {
+            this.setState({
+              error:
+                "Houve um problema com o login, verifique suas credenciais. T.T"
+            });
+          }
+        }
+      };
 
     render() {
+        const showError = (
+            <Alert infos={this.state.error}>
+                {this.state.error}
+            </Alert>
+        )
+
         return (
             <>
                 <Wrapper>
@@ -54,7 +107,13 @@ export default class MenuUser extends React.Component {
                             </UserTextWrapper>
                         </UserInfos>
                         <UserLogin ref={div => this.menuUser = div}>
-                            <ButtonSecondary height="30px" width="80%" fontSize="12px" margin="1vh 1vw">
+                            <ButtonSecondary 
+                                onClick={() => this.modalAnimation.play()}
+                                height="30px" 
+                                width="80%" 
+                                fontSize="12px" 
+                                margin="1vh 1vw"
+                            >
                                 Entrar
                             </ButtonSecondary>
                             <LoginText to="/user/signup">Usuário novo? Cadastre-se</LoginText>
@@ -62,24 +121,40 @@ export default class MenuUser extends React.Component {
                         </UserLogin>
                     </User>
                 </Wrapper>
-                <Modal 
-                    title="Login" 
-                    content={
-                        <SignIn>
-                            <InputIcon 
-                                type="text"
-                                placeholder="Nome..."
-                                icon={UserImage}
-                            />
-                            <InputIcon 
-                                type="password"
-                                placeholder="Senha..."
-                                icon={KeyImage}
-                            />
-                            <ButtonPrimary width="50%">Entrar</ButtonPrimary>
-                        </SignIn>
-                    }
-                />
+                <ModalWrapper 
+                    ref={div => this.modalWrapper = div}
+                    onClick={() => this.modalAnimation.reverse()}    
+                >
+                    <ModalPage 
+                        ref={div => this.modal = div}
+                        onClick={event => event.stopPropagation()}
+                    >
+                        <CloseModal>
+                            <CloseModalIcon onClick={() => this.modalAnimation.reverse()} />
+                        </CloseModal>
+                        <ModalTitle>Login</ModalTitle>
+                        <ModalContent>
+                            {showError}
+                            <SignIn onSubmit={this.handleSignIn}>
+                                <InputIcon 
+                                    type="text"
+                                    placeholder="Nome..."
+                                    icon={UserImage}
+                                    onChange={e => this.setState({ name: e.target.value })}
+                                />
+                                <InputIcon 
+                                    type="password"
+                                    placeholder="Senha..."
+                                    icon={KeyImage}
+                                    onChange={e => this.setState({ password: e.target.value })}
+                                />
+                                <ButtonPrimary width="50%" >Entrar</ButtonPrimary>
+                                <LoginText to="/user/signup">Usuário novo? Cadastre-se</LoginText>
+                                <LoginText to="/user/recoverPassword">Perdeu sua senha? Recupere</LoginText>
+                            </SignIn>
+                        </ModalContent>
+                    </ModalPage>
+                </ModalWrapper> 
             </>
         )
     }

@@ -42,7 +42,7 @@ export default class Navbar extends React.Component {
     window.addEventListener('scroll', this.listenScrollEvent)
 
     this.menuAnimation
-      .from(this.menu, 1, { left: 800 }, 0);
+      .from(this.menu, 1, { left: 850 }, 0);
   }
 
   handlerClick() {

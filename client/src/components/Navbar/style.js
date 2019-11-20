@@ -213,7 +213,7 @@ export const MenuLinkExpansive = styled.div`
   flex-flow: column nowrap;
   align-items: center;
   width: 150px;
-  margin-top: 162px;
+  top: 75px;
   background-color: var(--color-1);
   box-shadow: 0px 10px 10px 0px rgba(0,0,0,0.25);
 

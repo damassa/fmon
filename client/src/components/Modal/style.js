@@ -15,6 +15,7 @@ export const ModalWrapper = styled.div`
 `
 
 export const Modal = styled.div`
+    position: relative;
     display: flex;
     height: ${props => props.height ? props.height : 'auto'};
     width: ${props => props.width ? props.width : '450px'};
