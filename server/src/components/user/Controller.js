@@ -1,6 +1,8 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const expressJwt = require('express-jwt');
+const { validationResult } = require('express-validator');
+
 const db = require('../../database');
 
 const salt = 10;
@@ -8,6 +10,11 @@ const salt = 10;
 require('dotenv').config();
 
 exports.signup = (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(422).json({ errors: errors.array() });
+    }
+
     const name = req.body.name;
     const email = req.body.email;
     const password = req.body.password;
@@ -123,6 +130,11 @@ exports.read = (req, res) => {
 }
 
 exports.update = (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(422).json({ errors: errors.array() });
+    }
+    
     let email = req.body.email ? req.body.email : req.user.email;
     let password;
 
