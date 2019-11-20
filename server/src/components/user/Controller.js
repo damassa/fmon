@@ -3,6 +3,8 @@ const jwt = require('jsonwebtoken');
 const expressJwt = require('express-jwt');
 const db = require('../../database');
 
+const salt = 10;
+
 require('dotenv').config();
 
 exports.signup = (req, res) => {
@@ -12,7 +14,7 @@ exports.signup = (req, res) => {
     const repeatPassword = req.body.repeatPassword;
 
     if(repeatPassword === password) {
-        bcrypt.hash(password, 10, function(e, hash) {
+        bcrypt.hash(password, salt, function(e, hash) {
             let sql = `insert into users (name, email, password) values (?, ?, ?)`;
             db.connect.query(sql, [name, email, hash], (err, values) => {
                 if(err) {
@@ -111,5 +113,33 @@ exports.secret = (req, res) => {
 exports.auth = (req, res) => {
     res.json({ 
         message: "Is Auth" 
+    });
+}
+
+exports.read = (req, res) => {
+    req.user.password = undefined;
+
+    return res.json(req.user);
+}
+
+exports.update = (req, res) => {
+    let email = req.body.email ? req.body.email : req.user.email;
+    let password;
+
+    if(req.body.password) {
+        password = bcrypt.hashSync(req.body.password, salt);
+    } else {
+        password = req.user.password;
+    }
+
+    let sql = `update users set email = ?,password = ? where id = ?`;
+    db.connect.query(sql, [email, password, req.user.id], (err, values) => {
+        if(err) {
+            return res.status(400).json({
+                error: err
+            })
+        } else {
+            return res.status(200).json(values);
+        }
     });
 }
