@@ -3,7 +3,8 @@ import styled from 'styled-components';
 export const ButtonPrimary = styled.button`
     width: ${props => props.width ? props.width : '100%'};
     height: ${props => props.height ? props.height : '50px'};
-    margin: 1vh 1vw;
+    font-size: ${props => props.fontSize ? props.fontSize : '16px'};
+    margin: ${props => props.margin ? props.margin : '1vh 0'};
     font-weight: bold;
     color: #fff;
     background-color: var(--color-1);
@@ -16,6 +17,7 @@ export const ButtonPrimary = styled.button`
     &:hover {
         background-color: #fff;
         color: var(--color-1);
+        border-color: var(--color-1);
     }
 `
 

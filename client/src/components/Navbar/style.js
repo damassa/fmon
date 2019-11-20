@@ -282,3 +282,10 @@ export const LoginText = styled(Link)`
     text-decoration: underline;
   }
 `
+
+export const SignIn = styled.form`
+  display: flex;
+  width: 90%;
+  flex-flow: column nowrap;
+  align-items: center;
+`
