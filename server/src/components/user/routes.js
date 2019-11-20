@@ -19,11 +19,14 @@ const {
 
 //Auth Routes
 router.post('/user/signup', [
-    check('name').isLength({ min: 4}),
+    check('name').isLength({ min: 3}),
     check('email').isEmail(),
     check('password').isLength({ min: 6 })
 ], signup);
-router.post('/user/signin', signin);
+router.post('/user/signin', [
+    check('name').isLength({ min: 3}),
+    check('password').isLength({ min: 6 })
+], signin);
 router.get('/user/signout', signout);
 
 //User Routes

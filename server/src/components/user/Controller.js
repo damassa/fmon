@@ -41,6 +41,11 @@ exports.signup = (req, res) => {
 }
 
 exports.signin = (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(422).json({ errors: errors.array() });
+    }
+
     const { name, password } = req.body;
 
     let sql = `select distinct * from users where name = ?`;
@@ -134,15 +139,9 @@ exports.update = (req, res) => {
     if (!errors.isEmpty()) {
         return res.status(422).json({ errors: errors.array() });
     }
-    
-    let email = req.body.email ? req.body.email : req.user.email;
-    let password;
 
-    if(req.body.password) {
-        password = bcrypt.hashSync(req.body.password, salt);
-    } else {
-        password = req.user.password;
-    }
+    let email = req.body.email;
+    let password = bcrypt.hashSync(req.body.password, salt);
 
     let sql = `update users set email = ?,password = ? where id = ?`;
     db.connect.query(sql, [email, password, req.user.id], (err, values) => {
