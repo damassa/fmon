@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 export const Wrapper = styled.div`
   position: absolute;
@@ -33,13 +34,13 @@ export const HomeBody = styled.div`
 export const HomeNews = styled.div`
   display: flex;
   margin: 0 5vw;
-  flex-grow: 5;
-  flex-flow: row nowrap;
+  flex-grow: 2;
+  flex-flow: column nowrap;
   justify-content: center;
   align-items: center;
 `
 
-export const NewsTop = styled.div`
+export const HomeNewsTop = styled.div`
   display: flex;
   width: 100%;
   height: 50px;
@@ -47,7 +48,7 @@ export const NewsTop = styled.div`
   align-items: center;
 `
 
-export const NewsTopCard = styled.div`
+export const HomeNewsTopCard = styled(Link)`
   display: flex;
   width: 200px;
   height: 100%;

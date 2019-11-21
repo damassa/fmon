@@ -17,8 +17,6 @@ export default class Logout extends React.Component {
         action();
 
         this.setState({ navigate: true });
-
-        window.location.reload();
     }
 
     render() {

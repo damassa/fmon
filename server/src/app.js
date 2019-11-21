@@ -8,6 +8,7 @@ require('dotenv').config();
 
 //Import routes
 const userRoutes = require('./components/user/routes');
+const newsRoutes = require('./components/news/routes');
 
 //App
 const app = express();
@@ -20,6 +21,7 @@ app.use(cors());
 
 //Routes middleware
 app.use("/api", userRoutes);
+app.use("/api", newsRoutes);
 
 //Running app
 const port = process.env.PORT || 4000;

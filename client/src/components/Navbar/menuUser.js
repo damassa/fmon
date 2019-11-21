@@ -94,7 +94,11 @@ class MenuUser extends React.Component {
             
             login(response.data.token, response.data.user.id, response.data.user.name);     
             
-            window.location.reload();
+            this.modalAnimation.reverse();
+
+            this.setState({
+                username: response.data.user.name
+            })
           } catch (err) {
             this.setState({
               error:
