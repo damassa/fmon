@@ -1,5 +1,6 @@
 import React from 'react';
 import { TimelineLite } from "gsap/all";
+import { withRouter } from "react-router-dom";
 
 import UserImage from '../../assets/icons/user-color.svg';
 import KeyImage from '../../assets/icons/key.svg';
@@ -32,7 +33,7 @@ import {
     ModalContent 
 } from '../Modal/style';
 
-export default class MenuUser extends React.Component {
+class MenuUser extends React.Component {
     constructor(props){
         super(props);
 
@@ -73,24 +74,27 @@ export default class MenuUser extends React.Component {
           this.setState({ error: "Preencha o nome e senha para continuar!" });
         } else {
           try {
-            const response = await api.post("/user/signin", { name, password });
-            login(response.data.token);
+            const response = await api.post("/user/signin", { name, password }); 
+            
+            login(response.data.token, response.data.user.id);     
+            
+            window.location.reload();
           } catch (err) {
             this.setState({
               error:
-                "Houve um problema com o login, verifique suas credenciais. T.T"
+                "Houve um problema com o login, verifique suas credenciais."
             });
           }
         }
-      };
+    };
 
-    render() {
+    render() {        
         const showError = (
             <Alert infos={this.state.error}>
                 {this.state.error}
             </Alert>
         )
-
+        
         return (
             <>
                 <Wrapper>
@@ -103,7 +107,7 @@ export default class MenuUser extends React.Component {
                             <UserIcon />
                             <UserTextWrapper>
                                 <UserText>Bem vindo,</UserText>
-                                <UserSubText>Faça login ou Registre-se</UserSubText>
+                                <UserSubText>{this.props.username}</UserSubText>
                             </UserTextWrapper>
                         </UserInfos>
                         <UserLogin ref={div => this.menuUser = div}>
@@ -159,3 +163,5 @@ export default class MenuUser extends React.Component {
         )
     }
 }
+
+export default withRouter(MenuUser);

@@ -123,9 +123,7 @@ exports.secret = (req, res) => {
 }
 
 exports.auth = (req, res) => {
-    res.json({ 
-        message: "Is Auth" 
-    });
+    res.json(req.user);
 }
 
 exports.read = (req, res) => {

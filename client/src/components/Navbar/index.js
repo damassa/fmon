@@ -1,5 +1,6 @@
 import React from 'react';
 import { TimelineLite } from "gsap/all";
+import { withRouter } from "react-router-dom";
 
 import { 
   Nav, 
@@ -13,7 +14,7 @@ import {
 import MenuUser from './menuUser';
 import MenuLinks from './menuLinks';
 
-export default class Navbar extends React.Component {
+class Navbar extends React.Component {
   constructor(props){
     super(props);
     
@@ -80,3 +81,5 @@ export default class Navbar extends React.Component {
     )
   };
 }
+
+export default withRouter(Navbar);
