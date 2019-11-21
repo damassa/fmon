@@ -4,7 +4,7 @@ import CloseIcon from '../../assets/icons/close.svg';
 
 export const ModalWrapper = styled.div`
     position: fixed;
-    display: flex;
+    display: none;
     top: 0%;
     left: 0;
     height: 100vh;

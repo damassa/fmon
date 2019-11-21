@@ -50,12 +50,13 @@ exports.signin = (req, res) => {
 
     let sql = `select distinct * from users where name = ?`;
     db.connect.query(sql, [name], (err, values) => {
-        values = values[0];
-        if(err) {
-            res.status(400).json({
+        if(err || !values[0]) {        
+            return res.status(400).json({
                 error: err
             });
         }
+        values = values[0];
+
         bcrypt.compare(password, values.password).then((hash) => {
             if(hash) {
                 const token = jwt.sign({ id: values.id }, process.env.SECRET);

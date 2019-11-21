@@ -7,6 +7,7 @@ import Championships    from './components/pages/Championships';
 import Ladder           from './components/pages/Ladder';
 import Ultimate         from './components/pages/Ultimate';
 import Store            from './components/pages/Store';
+import UserRoutes       from './components/User/routes';
 
 export default class Routes extends React.Component {
   render() {
@@ -19,6 +20,7 @@ export default class Routes extends React.Component {
             <Route exact={true} path="/ladder"          component={Ladder} />
             <Route exact={true} path="/ultimate"        component={Ultimate} />
             <Route exact={true} path="/store"           component={Store} />
+            <UserRoutes />
         </Switch>
       </BrowserRouter>
     )

@@ -250,7 +250,7 @@ export const UserInfos = styled.div`
 
 export const UserLogin = styled.div`
   position: absolute;
-  display: flex;
+  display: none;
   flex-flow: column nowrap;
   align-items: center;
   width: 200px;

@@ -6,7 +6,7 @@ import UserImage from '../../assets/icons/user-color.svg';
 import KeyImage from '../../assets/icons/key.svg';
 
 import api from '../../services/api';
-import { login } from "../../services/auth";
+import { login, isAuthenticated } from "../../services/auth";
 
 import {
     MenuUser as Wrapper, 
@@ -17,9 +17,10 @@ import {
     UserText,
     UserSubText,
     UserInfos,
-    UserLogin,
+    UserLogin,  
     LoginText,
-    SignIn
+    SignIn,
+    MenuLinkHover
   } from './style';
 import { ButtonSecondary, ButtonPrimary } from '../FormFields/button';
 import { InputIcon } from '../FormFields/input';
@@ -32,6 +33,7 @@ import {
     ModalTitle, 
     ModalContent 
 } from '../Modal/style';
+import Logout from '../User/logout';
 
 class MenuUser extends React.Component {
     constructor(props){
@@ -40,7 +42,8 @@ class MenuUser extends React.Component {
         this.state = {
             name: "",
             password: "",
-            error: ""
+            error: "",
+            username: localStorage.name,
         };
         
         this.menuUser = null;
@@ -52,13 +55,26 @@ class MenuUser extends React.Component {
         this.modalAnimation = new TimelineLite({ paused: true });
     }
 
-    componentDidMount() {
+    async componentDidMount() {
         document.addEventListener("keydown", this.keyDownHandler.bind(this));
 
+        if(isAuthenticated()) {
+            let response = await api.get('/user/' + localStorage.id)
+                    
+            response = await response.data.name
+            
+            this.setState({username: response})
+        } else {
+            this.setState({
+                username: 'Faça login ou Registre-se'
+            })
+        }
         this.menuUserAnimation
+            .to(this.menuUser, 0, {css: {display: 'flex'}})
             .from(this.menuUser, 0.5, { autoAlpha: 0 })
 
         this.modalAnimation
+            .to(this.modalWrapper, 0, {css: {display: 'flex'}})
             .from(this.modalWrapper, 0.5, { autoAlpha: 0 })
             .from(this.modal, 0.5, { bottom: 500, autoAlpha: 0})
     }
@@ -76,7 +92,7 @@ class MenuUser extends React.Component {
           try {
             const response = await api.post("/user/signin", { name, password }); 
             
-            login(response.data.token, response.data.user.id);     
+            login(response.data.token, response.data.user.id, response.data.user.name);     
             
             window.location.reload();
           } catch (err) {
@@ -88,13 +104,41 @@ class MenuUser extends React.Component {
         }
     };
 
+    UserMenuDown() {
+        if(isAuthenticated()) {
+            return(
+                <UserLogin ref={div => this.menuUser = div}>
+                    <MenuLinkHover to={"/user/" + localStorage.id}>Meu Perfil</MenuLinkHover>
+                    <MenuLinkHover to={"/user/config/" + localStorage.id}>Configurações</MenuLinkHover>
+                    <Logout />
+                </UserLogin>
+            )
+        } else {
+            return (
+                <UserLogin ref={div => this.menuUser = div}>
+                    <ButtonSecondary 
+                        onClick={() => this.modalAnimation.play()}
+                        height="30px" 
+                        width="80%" 
+                        fontSize="12px" 
+                        margin="1vh 1vw"
+                    >
+                        Entrar
+                    </ButtonSecondary>
+                    <LoginText to="/user/signup">Usuário novo? Cadastre-se</LoginText>
+                    <LoginText to="/user/recoverPassword">Perdeu sua senha? Recupere</LoginText>
+                </UserLogin>
+            )
+        }
+    }
+
     render() {        
         const showError = (
             <Alert infos={this.state.error}>
                 {this.state.error}
             </Alert>
         )
-        
+       
         return (
             <>
                 <Wrapper>
@@ -107,22 +151,10 @@ class MenuUser extends React.Component {
                             <UserIcon />
                             <UserTextWrapper>
                                 <UserText>Bem vindo,</UserText>
-                                <UserSubText>{this.props.username}</UserSubText>
+                                <UserSubText>{this.state.username}</UserSubText>
                             </UserTextWrapper>
                         </UserInfos>
-                        <UserLogin ref={div => this.menuUser = div}>
-                            <ButtonSecondary 
-                                onClick={() => this.modalAnimation.play()}
-                                height="30px" 
-                                width="80%" 
-                                fontSize="12px" 
-                                margin="1vh 1vw"
-                            >
-                                Entrar
-                            </ButtonSecondary>
-                            <LoginText to="/user/signup">Usuário novo? Cadastre-se</LoginText>
-                            <LoginText to="/user/recoverPassword">Perdeu sua senha? Recupere</LoginText>
-                        </UserLogin>
+                        {this.UserMenuDown()}
                     </User>
                 </Wrapper>
                 <ModalWrapper 
