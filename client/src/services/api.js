@@ -4,7 +4,7 @@ import { getToken } from "./auth";
 require('dotenv').config();
 
 const api = axios.create({
-  baseURL: process.env.HOST + "/api"
+  baseURL: process.env.HOST
 });
 
 api.interceptors.request.use(async config => {
