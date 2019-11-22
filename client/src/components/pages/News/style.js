@@ -31,7 +31,7 @@ export const NewsBackground = styled.div`
     background-image: url(${props => props.image});
     background-position: center top;
     background-repeat: no-repeat;
-    background-size: 100%;
+    background-size: cover;
     transition: 0.5s;
 `
 

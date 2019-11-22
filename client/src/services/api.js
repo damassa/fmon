@@ -1,8 +1,10 @@
 import axios from "axios";
 import { getToken } from "./auth";
 
+require('dotenv').config();
+
 const api = axios.create({
-  baseURL: "http://127.0.0.1:4000/api"
+  baseURL: process.env.HOST + "/api"
 });
 
 api.interceptors.request.use(async config => {

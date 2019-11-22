@@ -1,4 +1,6 @@
 import React from 'react';
+import { formatRelative } from 'date-fns';
+import { pt } from 'date-fns/locale';
 
 import { 
     HomeNews as Wrapper,
@@ -16,13 +18,31 @@ import {
     NewsDate,
     NewsLike,
     NewsViews,
-    NewsInfosSeparator,
-    NewsLine
+    NewsInfosSeparator
 } from '../News/style'
-
-import NewsImage from '../../../assets/news/lfm.jpg'
+import api from '../../../services/api'
 
 export default class HomeNews extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            news: []
+        }
+    }
+
+    componentDidMount() {
+        this.getNews().then(res => {
+            this.setState({
+                news: res.data
+            })
+        });
+    }
+
+    async getNews() {
+        return await api.get("/news", {limit: 3});
+    }
+
     render() {
         return (
             <Wrapper>
@@ -32,50 +52,32 @@ export default class HomeNews extends React.Component {
                     </HomeNewsTopCard>
                 </HomeNewsTop>
                 <NewsBody>
-                    <NewsCard to="/news/1">
-                        <NewsBackground className="newsBackground" image={NewsImage} />
-                        <NewsTitle>Teste</NewsTitle>
-                        <NewsInfos>
-                            <NewsInfosSeparator>
-                                <NewsAuthor>Admin</NewsAuthor>
-                                <NewsDate>21/11/19</NewsDate>
-                            </NewsInfosSeparator>
-                            <NewsInfosSeparator>
-                                <NewsLike>15</NewsLike>
-                                <NewsViews>15</NewsViews>
-                            </NewsInfosSeparator>
-                        </NewsInfos>
-                    </NewsCard>
-                    <NewsLine>
-                        <NewsCard to="/news/1">
-                            <NewsBackground className="newsBackground" image={NewsImage} />
-                            <NewsTitle>Teste</NewsTitle>
+                    {this.state.news.map((element, index) => (
+                        <NewsCard key={index} to={"/news/" + element.id}>
+                            <NewsBackground 
+                                className="newsBackground" 
+                                image={"data:image/png;base64," + element.image} 
+                            />
+                            <NewsTitle>{element.title}</NewsTitle>
                             <NewsInfos>
                                 <NewsInfosSeparator>
-                                    <NewsAuthor>Admin</NewsAuthor>
-                                    <NewsDate>21/11/19</NewsDate>
+                                    <NewsAuthor>{element.authorName}</NewsAuthor>
+                                    <NewsDate>
+                                        {formatRelative(
+                                            new Date(), 
+                                            new Date(),
+                                            {locale: pt} 
+                                        )}
+                                        {console.log(element.createdAt)}
+                                    </NewsDate>
                                 </NewsInfosSeparator>
                                 <NewsInfosSeparator>
-                                    <NewsLike>15</NewsLike>
-                                    <NewsViews>15</NewsViews>
+                                    <NewsLike>{element.likes}</NewsLike>
+                                    <NewsViews>{element.views}</NewsViews>
                                 </NewsInfosSeparator>
                             </NewsInfos>
                         </NewsCard>
-                        <NewsCard to="/news/1">
-                            <NewsBackground className="newsBackground" image={NewsImage} />
-                            <NewsTitle>Teste</NewsTitle>
-                            <NewsInfos>
-                                <NewsInfosSeparator>
-                                    <NewsAuthor>Admin</NewsAuthor>
-                                    <NewsDate>21/11/19</NewsDate>
-                                </NewsInfosSeparator>
-                                <NewsInfosSeparator>
-                                    <NewsLike>15</NewsLike>
-                                    <NewsViews>15</NewsViews>
-                                </NewsInfosSeparator>
-                            </NewsInfos>
-                        </NewsCard>
-                    </NewsLine>
+                    ))}
                 </NewsBody>
             </Wrapper>
         )

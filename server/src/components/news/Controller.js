@@ -1,5 +1,6 @@
 const formidable = require('formidable');
 const fs = require('fs');
+const format = require('date-format'); 
 
 const db = require('../../database');
 
@@ -65,4 +66,53 @@ exports.createNews = (req, res) => {
             });
         });
     })
+}
+
+exports.newsById = (req, res, next, id) => {
+    let sql = `SELECT A.id, A.title, A.text, C.image, A.author, B.name as 'authorName', A.createdAt, A.updatedAt, A.likes, A.views
+    FROM news as A 
+    LEFT JOIN users as B ON A.author = B.id 
+    LEFT JOIN images as C ON A.image = C.id 
+    WHERE A.id = ?`;
+    db.connect.query(sql, [id], (err, values) => {
+        if(err || !values) {
+            return res.status(400).json({
+                error: err
+            })
+        }
+        req.news = values[0];
+        next();
+    });
+}
+
+exports.readOneNews = (req, res) => {
+    res.status(200).json(req.news);
+}
+
+exports.listNews = (req, res) => {
+    let order = req.query.order ? req.query.order : 'desc';
+    let sortBy = req.query.sortBy ? req.query.sortBy : 'createdAt';
+    let limit = req.query.limit ? req.query.limit : '6';
+    
+    let sql = `SELECT A.id, A.title, A.text, C.image, A.author, B.name as 'authorName', A.createdAt, A.updatedAt, A.likes, A.views
+    FROM news as A 
+    LEFT JOIN users as B ON A.author = B.id 
+    LEFT JOIN images as C ON A.image = C.id 
+    ORDER BY A.${sortBy} ${order}
+    LIMIT 0, ${limit}`;
+    db.connect.query(sql, (err, values) => {
+        if(err || !values) {
+            return res.status(400).json({
+                error: err
+            })
+        }
+
+        console.log(values.length());
+
+        for(i = 0; i < values.length(); i++) {
+            values[i].createdAt = format.asString('yyyy-MM-dd hh:mm:ss', new Date(values[i].createdAt));
+        }
+        
+        return res.status(200).json(values);
+    });
 }

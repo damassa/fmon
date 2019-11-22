@@ -35,7 +35,7 @@ export const HomeNews = styled.div`
   display: flex;
   max-width: 100vw;
   margin: 0 5vw;
-  flex-grow: 2;
+  flex-grow: 1;
   flex-flow: column nowrap;
   justify-content: center;
   align-items: center;
