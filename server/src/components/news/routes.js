@@ -1,5 +1,6 @@
 const { Router } = require('express');
-const { check } = require('express-validator');
+
+require('dotenv').config();
 
 const router = Router();
 

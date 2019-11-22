@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Tempo de geração: 20/11/2019 às 14:17
+-- Tempo de geração: 21/11/2019 às 23:07
 -- Versão do servidor: 5.7.28
 -- Versão do PHP: 7.3.6
 
@@ -21,6 +21,36 @@ SET time_zone = "+00:00";
 --
 -- Banco de dados: `fmon`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `images`
+--
+
+CREATE TABLE `images` (
+  `id` int(11) NOT NULL,
+  `image` longtext NOT NULL,
+  `name` varchar(200) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `news`
+--
+
+CREATE TABLE `news` (
+  `id` int(11) NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `image` int(12) NOT NULL,
+  `text` varchar(1250) NOT NULL,
+  `author` int(11) NOT NULL,
+  `likes` int(11) NOT NULL DEFAULT '0',
+  `views` int(11) NOT NULL DEFAULT '0',
+  `createdAt` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updatedAt` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -43,6 +73,21 @@ CREATE TABLE `users` (
 --
 
 --
+-- Índices de tabela `images`
+--
+ALTER TABLE `images`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Índices de tabela `news`
+--
+ALTER TABLE `news`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `id` (`id`),
+  ADD KEY `fk_author` (`author`),
+  ADD KEY `image` (`image`);
+
+--
 -- Índices de tabela `users`
 --
 ALTER TABLE `users`
@@ -53,6 +98,18 @@ ALTER TABLE `users`
 --
 -- AUTO_INCREMENT de tabelas apagadas
 --
+
+--
+-- AUTO_INCREMENT de tabela `images`
+--
+ALTER TABLE `images`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de tabela `news`
+--
+ALTER TABLE `news`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de tabela `users`

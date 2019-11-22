@@ -1,10 +1,10 @@
-const { validationResult } = require('express-validator');
 const formidable = require('formidable');
 const fs = require('fs');
 
 const db = require('../../database');
 
 require('dotenv').config();
+
 
 exports.createNews = (req, res) => {
     let form = new formidable.IncomingForm();
@@ -18,7 +18,8 @@ exports.createNews = (req, res) => {
         }
 
         const { title, text } = fields;
-        let image = '';
+        let image = files.image;
+        let image64 = '';
 
         if(!title || !text) {
             return res.status(400).json({
@@ -26,29 +27,42 @@ exports.createNews = (req, res) => {
             })
         }
 
-        if(files.image) {
-            if(files.image.size > process.env.MAX_IMAGE_SIZE) {
+        if(image) {
+            if(image.size > process.env.MAX_IMAGE_SIZE) {
                 return res.status(400).json({
                     error: 'Image is to big'
                 })
             }
 
-            image.data = fs.readFileSync(files.image.path);
-            image.type = files.image.type;
+            if(!(image.type == "image/png" || image.type == "image/jpg" || image.type == "image/jpeg")) {
+                return res.status(400).json({
+                    error: 'Wrong type of file'
+                })
+            }
+
+            image64 = fs.readFileSync(image.path, 'base64');
         } else {
             return res.status(400).json({
                 error: 'Image is required'
             })
         }
-
-        let sql = `insert into news (title, image, imageType, text, author) values (?, ?, ?, ?, ?)`;
-        db.connect.query(sql, [title, image.data, image.type, text, req.user.id], (err, values) => {
+        let sql = `INSERT INTO images(image, name) VALUES (?, ?)`;
+        db.connect.query(sql, [image64, image.name], (err, values) => {
             if(err) {
                 return res.status(400).json({
                     error: err
                 })
             }
-            res.status(200).json(values);
+
+            sql = `insert into news (title, image, text, author) values (?, ?, ?, ?)`;
+            db.connect.query(sql, [title, values.insertId, text, req.user.id], (err, val) => {
+                if(err) {
+                    return res.status(400).json({
+                        error: err
+                    })
+                }
+                res.status(200).json(val);
+            });
         });
     })
 }
