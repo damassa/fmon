@@ -50,7 +50,7 @@ export default class MenuLinks extends React.Component {
                     </MenuLinkExpansive>
                 </MenuLinkWrapper>
                 <MenuLink to="/ultimate">Ultimate</MenuLink>
-                <MenuLink to="/ladder">Notícias</MenuLink>
+                <MenuLink to="/news">Notícias</MenuLink>
                 <MenuLink to="/store">Loja</MenuLink>
             </LinksWrapper>
         )

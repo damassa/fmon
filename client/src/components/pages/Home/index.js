@@ -14,7 +14,7 @@ export default class Home extends React.Component {
         <HomeLastGames />
         <HomeBody>
           <HomeNews />
-          <div style={{flexGrow: "1", backgroundColor: "lightblue", margin: "0 5vw"}}>A ser feito</div>
+          <div style={{flexGrow: "1", backgroundColor: "lightblue", margin: "0"}}>A ser feito</div>
         </HomeBody>
         <div style={{height: "100vh"}} />
       </Wrapper>

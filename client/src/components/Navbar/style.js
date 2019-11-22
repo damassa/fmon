@@ -10,8 +10,7 @@ import MenuImg from '../../assets/icons/menu.svg';
 export const Nav = styled.div`
   position: fixed;
   display: flex;
-  width: 100%;
-  max-width: 100%;
+  width: 100vw;
   height: 75px;
   top: 0;
   flex-flow: row nowrap;
@@ -25,9 +24,10 @@ export const Nav = styled.div`
 
 export const FakeSpace = styled.div`
   position: relative;
-  width: 100%;
+  width: 100vw;
   height: 75px;
-  z-index: -1;
+  z-index: 0;
+  background-color: rgba(0,0,0,0.75);
 `
 
 export const Logo = styled(NavLink)`

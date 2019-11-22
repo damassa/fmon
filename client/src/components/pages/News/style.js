@@ -47,6 +47,12 @@ export const NewsInfos = styled.div`
     display: flex;
     flex-flow: row nowrap;
     justify-content: space-between;
+
+    @media only screen and (max-width: 700px) {
+        & div:last-child {
+            display: none;
+        }
+    }
 `
 
 export const NewsInfosSeparator = styled.div`
@@ -58,6 +64,12 @@ export const NewsInfosSeparator = styled.div`
     & div:first-child:after {
         content: "|";
         margin: 20px;
+    }
+
+    @media only screen and (max-width: 700px) {
+        & div:first-child:after {
+            content: "";
+        }
     }
 `
 

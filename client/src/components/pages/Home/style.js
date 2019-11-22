@@ -33,11 +33,16 @@ export const HomeBody = styled.div`
 
 export const HomeNews = styled.div`
   display: flex;
+  max-width: 100vw;
   margin: 0 5vw;
   flex-grow: 2;
   flex-flow: column nowrap;
   justify-content: center;
   align-items: center;
+
+  @media only screen and (max-width: 700px) {
+    margin: 0;
+  }
 `
 
 export const HomeNewsTop = styled.div`
@@ -51,6 +56,7 @@ export const HomeNewsTop = styled.div`
 export const HomeNewsTopCard = styled(Link)`
   display: flex;
   width: 200px;
+  max-width: 100vw;
   height: 100%;
   justify-content: flex-start;
   align-items: center;
@@ -73,5 +79,11 @@ export const HomeNewsTopCard = styled(Link)`
 
   & span {
     margin-left: 10px;
+  }
+
+  @media only screen and (max-width: 250px) {
+    &::after {
+      display: none;
+    }
   }
 `

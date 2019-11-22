@@ -31,7 +31,8 @@ import {
     CloseModal, 
     CloseModalIcon, 
     ModalTitle, 
-    ModalContent 
+    ModalContent,
+    ModalSuccess
 } from '../Modal/style';
 import Logout from '../User/logout';
 
@@ -64,10 +65,6 @@ class MenuUser extends React.Component {
             response = await response.data.name
             
             this.setState({username: response})
-        } else {
-            this.setState({
-                username: 'Faça login ou Registre-se'
-            })
         }
         this.menuUserAnimation
             .to(this.menuUser, 0, {css: {display: 'flex'}})
@@ -93,9 +90,7 @@ class MenuUser extends React.Component {
             const response = await api.post("/user/signin", { name, password }); 
             
             login(response.data.token, response.data.user.id, response.data.user.name);     
-            
-            this.modalAnimation.reverse();
-
+        
             this.setState({
                 username: response.data.user.name
             })
@@ -115,6 +110,7 @@ class MenuUser extends React.Component {
                     <MenuLinkHover to={"/user/" + localStorage.id}>Meu Perfil</MenuLinkHover>
                     <MenuLinkHover to={"/user/config/" + localStorage.id}>Configurações</MenuLinkHover>
                     <Logout />
+                    
                 </UserLogin>
             )
         } else {
@@ -136,13 +132,69 @@ class MenuUser extends React.Component {
         }
     }
 
-    render() {        
-        const showError = (
+    showError() {
+        return (
             <Alert infos={this.state.error}>
                 {this.state.error}
             </Alert>
         )
-       
+    }
+
+    modalInside() {
+        if(isAuthenticated()) {
+            setTimeout(() => {
+                this.modalAnimation.reverse();
+            }, 2000);
+            return (
+                <ModalContent>
+                    <ModalSuccess>
+                        Bem vindo, {this.state.username}
+                    </ModalSuccess>
+                </ModalContent>
+            )
+        } else {
+            return (
+                <ModalContent>
+                    {this.showError()}
+                    <SignIn onSubmit={this.handleSignIn}>
+                        <InputIcon 
+                            type="text"
+                            placeholder="Nome..."
+                            icon={UserImage}
+                            onChange={e => this.setState({ name: e.target.value })}
+                        />
+                        <InputIcon 
+                            type="password"
+                            placeholder="Senha..."
+                            icon={KeyImage}
+                            onChange={e => this.setState({ password: e.target.value })}
+                        />
+                        <ButtonPrimary width="50%" >Entrar</ButtonPrimary>
+                        <LoginText to="/user/signup">Usuário novo? Cadastre-se</LoginText>
+                        <LoginText to="/user/recoverPassword">Perdeu sua senha? Recupere</LoginText>
+                    </SignIn>
+                </ModalContent>
+            )
+        }
+    }
+
+    welcomeName() {
+        if(isAuthenticated()) {
+            return (
+                <span>
+                    {this.state.username}
+                </span>
+            );
+        } else {
+            return (
+                <span>
+                    Faça login ou Registre-se
+                </span>
+            )
+        }
+    }
+
+    render() {             
         return (
             <>
                 <Wrapper>
@@ -155,7 +207,7 @@ class MenuUser extends React.Component {
                             <UserIcon />
                             <UserTextWrapper>
                                 <UserText>Bem vindo,</UserText>
-                                <UserSubText>{this.state.username}</UserSubText>
+                                <UserSubText>{this.welcomeName()}</UserSubText>
                             </UserTextWrapper>
                         </UserInfos>
                         {this.UserMenuDown()}
@@ -173,26 +225,7 @@ class MenuUser extends React.Component {
                             <CloseModalIcon onClick={() => this.modalAnimation.reverse()} />
                         </CloseModal>
                         <ModalTitle>Login</ModalTitle>
-                        <ModalContent>
-                            {showError}
-                            <SignIn onSubmit={this.handleSignIn}>
-                                <InputIcon 
-                                    type="text"
-                                    placeholder="Nome..."
-                                    icon={UserImage}
-                                    onChange={e => this.setState({ name: e.target.value })}
-                                />
-                                <InputIcon 
-                                    type="password"
-                                    placeholder="Senha..."
-                                    icon={KeyImage}
-                                    onChange={e => this.setState({ password: e.target.value })}
-                                />
-                                <ButtonPrimary width="50%" >Entrar</ButtonPrimary>
-                                <LoginText to="/user/signup">Usuário novo? Cadastre-se</LoginText>
-                                <LoginText to="/user/recoverPassword">Perdeu sua senha? Recupere</LoginText>
-                            </SignIn>
-                        </ModalContent>
+                        {this.modalInside()}
                     </ModalPage>
                 </ModalWrapper> 
             </>

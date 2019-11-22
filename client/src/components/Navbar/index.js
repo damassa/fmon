@@ -43,6 +43,7 @@ class Navbar extends React.Component {
     window.addEventListener('scroll', this.listenScrollEvent)
 
     this.menuAnimation
+      .to(this.menu, 0, {css: {display: 'flex'}})
       .from(this.menu, 1, { left: 850 }, 0);
   }
 

@@ -56,8 +56,15 @@ export const ModalTitle = styled.div`
 export const ModalContent = styled.div`
     display: flex;
     width: 100%;
+    height: 100%;
     flex-flow: column nowrap;
     align-items: center;
     margin-bottom: 25px;
     color: #000;
+    transition: 0.5s;
+`
+
+export const ModalSuccess = styled.span`
+    font-size: 18px;
+    color: var(--color-1);
 `
