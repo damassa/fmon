@@ -14,12 +14,14 @@ const {
     createNews, 
     readOneNews,
     newsById,
-    listNews
+    listNews,
+    getImage
 } = require('./Controller');
 
 router.post("/news/create/:userId", requireSignin, isAuth, createNews);
 router.get("/news/:newsId", readOneNews);
 router.get("/news/", listNews);
+router.get("/news/image/:newsId", getImage);
 
 router.param('userId', userById);
 router.param('newsId', newsById);

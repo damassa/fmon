@@ -134,24 +134,27 @@ export const LoginWrapper = styled.div`
     flex-flow: row nowrap;
 
     color: #fff;
-
-    cursor: pointer;
 `
 
 export const LoginIcon = styled.div`
     width: 25px;
     height: 25px;
+    margin-right: 5px;
 
     background-image: url(${UserIcon});
     background-position: center;
     background-repeat: no-repeat;
     background-size: contain;
     filter: invert(100%);
+
+    cursor: pointer;
 `
 
 export const LoginInfos = styled.div`
     display: flex;
     flex-flow: column nowrap;
+
+    cursor: pointer;
 `
 
 export const LoginWelcome = styled.div`
@@ -199,5 +202,35 @@ export const DropLink = styled(Link)`
 
     &:hover {
         background-color: rgba(0, 0, 0, 0.5);
+    }
+`
+
+export const NavLinkIcon = styled.div`
+    width: 15px;
+    height: 15px;
+    margin-left: 5px;
+
+    background-image: url(${props => props.icon});
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+`
+
+export const LoginForm = styled.form`
+    display: flex;
+    flex-flow: column nowrap;
+    
+    width: 80%;
+`
+
+export const LinkForm = styled(Link)`
+    font-size: 14px;
+    color: var(--color-1);
+    
+    transition: 0.5s;
+    margin: 1vh 0;
+
+    &:hover {
+        text-decoration: underline;
     }
 `

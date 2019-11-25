@@ -11,8 +11,8 @@ import {
 } from './style';
 
 const Navbar = () => {
-    const [shadow, setShadow] = useState(0);
-    const [bgColor, setBgColor] = useState(0);
+    const [shadow, setShadow] = useState();
+    const [bgColor, setBgColor] = useState();
 
     useEffect(() => {
         const scrollCallBack = window.addEventListener("scroll", () => {
@@ -29,6 +29,7 @@ const Navbar = () => {
           };
         }, 
     []);
+
     return (
         <NavWrapper boxShadow={shadow} background={bgColor}>
             <LogoWrapper to="/">
@@ -42,3 +43,4 @@ const Navbar = () => {
 }
 
 export default Navbar;
+

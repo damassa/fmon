@@ -7,8 +7,11 @@ import {
     MenuLinks,
     NavLinkWrapper,
     NavDrop,
-    DropLink
+    DropLink,
+    NavLinkIcon
 } from './style';
+
+import ArrowDownIcon from '../../assets/icons/arrow-down.svg';
 
 const NavLinks = () => {
     let droppedMenu = useRef();
@@ -33,7 +36,10 @@ const NavLinks = () => {
                     onMouseEnter={() => dropMenuAnimation.play()}
                     onMouseLeave={() => dropMenuAnimation.reverse()}
                 >
-                    <NavLinkStyled to="/championships">Campeonatos</NavLinkStyled>
+                    <NavLinkStyled to="/championships">
+                        Campeonatos 
+                        <NavLinkIcon icon={ArrowDownIcon} />
+                    </NavLinkStyled>
                     <NavDrop ref={div => droppedMenu = div}>
                         <DropLink to="/championships/slm">SLM</DropLink>
                         <DropLink to="/championships/lfm">LFM</DropLink>

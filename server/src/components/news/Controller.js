@@ -47,8 +47,8 @@ exports.createNews = (req, res) => {
                 error: 'Image is required'
             })
         }
-        let sql = `INSERT INTO images(image, name) VALUES (?, ?)`;
-        db.connect.query(sql, [image64, image.name], (err, values) => {
+        let sql = `INSERT INTO images(image) VALUES (?)`;
+        db.connect.query(sql, [image64], (err, values) => {
             if(err) {
                 return res.status(400).json({
                     error: err
@@ -69,7 +69,7 @@ exports.createNews = (req, res) => {
 }
 
 exports.newsById = (req, res, next, id) => {
-    let sql = `SELECT A.id, A.title, A.text, C.image, A.author, B.name as 'authorName', A.createdAt, A.updatedAt, A.likes, A.views
+    let sql = `SELECT A.id, A.title, A.text, A.author, B.name as 'authorName', A.createdAt, A.updatedAt, A.likes, A.views
     FROM news as A 
     LEFT JOIN users as B ON A.author = B.id 
     LEFT JOIN images as C ON A.image = C.id 
@@ -90,11 +90,13 @@ exports.readOneNews = (req, res) => {
 }
 
 exports.listNews = (req, res) => {
-    let order = req.query.order ? req.query.order : 'desc';
-    let sortBy = req.query.sortBy ? req.query.sortBy : 'createdAt';
-    let limit = req.query.limit ? req.query.limit : '6';
+    let order = req.body.order ? req.body.order : 'desc';
+    let sortBy = req.body.sortBy ? req.body.sortBy : 'createdAt';
+    let limit = req.body.limit ? req.body.limit : 6;
+
+    console.log(req);
     
-    let sql = `SELECT A.id, A.title, A.text, C.image, A.author, B.name as 'authorName', A.createdAt, A.updatedAt, A.likes, A.views
+    let sql = `SELECT A.id, A.title, A.text, A.author, B.name as 'authorName', A.createdAt, A.updatedAt, A.likes, A.views
     FROM news as A 
     LEFT JOIN users as B ON A.author = B.id 
     LEFT JOIN images as C ON A.image = C.id 
@@ -106,13 +108,27 @@ exports.listNews = (req, res) => {
                 error: err
             })
         }
-
-        console.log(values.length());
-
-        for(i = 0; i < values.length(); i++) {
-            values[i].createdAt = format.asString('yyyy-MM-dd hh:mm:ss', new Date(values[i].createdAt));
-        }
         
         return res.status(200).json(values);
     });
+}
+
+exports.getImage = (req, res) => {
+    let sql = `SELECT image FROM news WHERE id = ?`;
+    db.connect.query(sql, [req.news.id], (err, values) => {
+        if(err || !values) {
+            return res.status(400).json({
+                error: err
+            })
+        }
+        sql = `SELECT image FROM images WHERE id = ?`;
+        db.connect.query(sql, [values[0].image], (err, val) => {
+            if(err || !values) {
+                return res.status(400).json({
+                    error: err
+                })
+            }
+            return res.status(200).json(val[0])
+        })
+    })
 }
