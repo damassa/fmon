@@ -1,28 +1,25 @@
 import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { Body } from './components/style.js'
 
-import Navbar           from './components/Navbar';
-import Home             from './components/pages/Home';
-import Championships    from './components/pages/Championships';
-import News             from './components/pages/News';
-import Ultimate         from './components/pages/Ultimate';
-import Store            from './components/pages/Store';
-import UserRoutes       from './components/User/routes';
+import Navbar           from './pages/Navbar';
+import Home             from './pages/Home';
+import News             from './pages/News';
+import Championships    from './pages/Championships';
 
-export default class Routes extends React.Component {
-  render() {
+const Routes = () => {
     return (
-      <BrowserRouter>
-        <Navbar />
-        <Switch>
-            <Route exact={true} path="/"                component={Home} />
-            <Route exact={true} path="/championships"   component={Championships} />
-            <Route exact={true} path="/news"            component={News} />
-            <Route exact={true} path="/ultimate"        component={Ultimate} />
-            <Route exact={true} path="/store"           component={Store} />
-            <UserRoutes />
-        </Switch>
-      </BrowserRouter>
+        <BrowserRouter>
+            <Navbar />
+            <Body>
+                <Switch>
+                    <Route path="/"                 exact={true} component={Home} />
+                    <Route path="/news"             exact={true} component={News} />
+                    <Route path="/championships"    exact={true} component={Championships} />
+                </Switch>
+            </Body>
+        </BrowserRouter>
     )
-  };
 }
+
+export default Routes;

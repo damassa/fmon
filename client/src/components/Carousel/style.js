@@ -1,8 +1,14 @@
 import styled from 'styled-components';
 
 export const CarouselWrapper = styled.div`
+  position: absolute;
+
   width: 100vw;
   height: 90vh;
+  top: 0;
+  left: 0;
+  
+  z-index: 0;
 `
 
 export const CarouselItem = styled.div`

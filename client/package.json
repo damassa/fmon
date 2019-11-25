@@ -2,12 +2,11 @@
   "name": "client",
   "version": "0.1.0",
   "private": true,
+  "main": "index.js",
+  "license": "MIT",
+  "author": "Peil",
   "dependencies": {
-    "axios": "^0.19.0",
-    "date-fns": "^2.8.1",
-    "dotenv": "^8.2.0",
     "gsap": "^3.0.1",
-    "prop-types": "^15.7.2",
     "re-carousel": "^2.4.0",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
@@ -21,9 +20,6 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
   "browserslist": {
     "production": [
       ">0.2%",
@@ -35,9 +31,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "main": "index.js",
-  "license": "MIT",
-  "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
-  "author": "Peil"
+  }
 }
