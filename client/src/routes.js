@@ -6,6 +6,7 @@ import Navbar           from './pages/Navbar';
 import Home             from './pages/Home';
 import News             from './pages/News';
 import Championships    from './pages/Championships';
+import UserRoutes       from './pages/User/routes'
 
 const Routes = () => {
     return (
@@ -16,6 +17,7 @@ const Routes = () => {
                     <Route path="/"                 exact={true} component={Home} />
                     <Route path="/news"             exact={true} component={News} />
                     <Route path="/championships"    exact={true} component={Championships} />
+                    <UserRoutes />
                 </Switch>
             </Body>
         </BrowserRouter>

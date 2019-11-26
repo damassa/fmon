@@ -16,7 +16,7 @@ export const NavWrapper = styled.div`
     justify-content: space-evenly;
     align-items: center;
 
-    background-color: ${props => props.background};
+    background-color: rgba(0,0,0,0.5);
     box-shadow: ${props => props.boxShadow};
     z-index: 2;
 `
@@ -217,35 +217,4 @@ export const NavLinkIcon = styled.div`
     background-position: center;
     background-repeat: no-repeat;
     background-size: contain;
-`
-
-export const LoginForm = styled.form`
-    display: flex;
-    flex-flow: column nowrap;
-    
-    width: 80%;
-`
-
-export const LinkForm = styled(Link)`
-    font-size: 14px;
-    color: var(--color-1);
-    text-align: center;
-    
-    transition: 0.5s;
-    margin: 1vh 0;
-
-    &:hover {
-        text-decoration: underline;
-    }
-`
-
-export const ShowError = styled.div`
-    width: calc(100% - 20px);
-    margin: 1vh 0;
-    padding: 10px;
-    display: ${props => props.Situation ? "flex" : "none"};
-
-    background-color: var(--color-1);
-    color: #fff;
-    border-radius: 10px;
 `

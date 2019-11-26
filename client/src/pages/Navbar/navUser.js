@@ -1,7 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { TimelineLite } from 'gsap/all'
+import { Link, withRouter } from 'react-router-dom';
 
-import { login, isAuthenticated } from '../../services/auth';
+import { isAuthenticated } from '../../services/auth';
 import Logout from '../User/logout';
 
 import { 
@@ -14,23 +15,21 @@ import {
     LoginWelcome,
     LoginName,
     NavDrop,
-    DropLink,
-    LoginForm,
-    LinkForm,
-    ShowError
+    DropLink
 } from './style';
 
-import { ButtonSecondary, ButtonPrimary }   from '../../components/Buttons';
-import Modal                                from '../../components/Modal';
-import { InputIcon }                        from '../../components/Input';
-import UserIcon                             from '../../assets/icons/user-color.svg'
-import KeyIcon                              from '../../assets/icons/key.svg'
+import { ButtonSecondary }  from '../../components/Buttons';
 
-const NavUser = () => {
+const NavUser = (props) => {
     let droppedUserMenu = useRef();
 
     const [dropMenuAnimation, setDropMenuAnimation] = useState();
     const [tl] = useState(new TimelineLite({ paused: true }));
+    const [logged, setLogged] = useState(isAuthenticated());
+
+    if(!logged && isAuthenticated()) {
+        setLogged(true);
+    }
 
     useEffect(() => {
         setDropMenuAnimation(
@@ -41,68 +40,19 @@ const NavUser = () => {
     // eslint-disable-next-line
     }, []);
 
-    const [Username, setUsername] = useState("");
-    const [UserPassword, setUserPassword] = useState("");
-    const [error, setError] = useState(null);
-    const data = JSON.stringify({name: Username, password: UserPassword});
-
-    const validateForm = (
-        username: String,
-        password: String,
-        setError: (error: String | null) => void
-    ): Boolean => {
-        if(!username || !password) {
-            setError("Preencha o nome e senha para continuar!")
-            return false
-        }
-
-        setError(null)
-        return true;
-    }
-
-    const handleSignIn = async e => {
-        fetch("http://localhost:4000/api/user/signin", {
-            method: "POST",
-            headers: {
-                Accept: 'application/json',
-                'Content-Type': 'application/json',
-            },
-            body: data,
-        }).then(response => {
-            response.json().then(values => {
-                login(values.token, values.user.id, values.user.name);
-                
-                dropMenuAnimation.reverse();
-                setError(false);
-            });
-        }).catch(err => {
-            setError("Houve um problema com o login, verifique suas credenciais.");
-        })
-    }
-
-    let user;
-    let userDrop;
-
-    if(isAuthenticated()) {
-        user = localStorage;
-
-        userDrop = (
-            <NavDrop ref={div => droppedUserMenu = div}>
-                <DropLink to={"/user/" + user.id}>Perfil</DropLink>
-                <DropLink to={"/user/config/" + user.id}>Configurações</DropLink>
-                <Logout />
-            </NavDrop>
-        )
-    } else {
-        user = {
-            name: "Faça Login ou Registre-se"
-        }
-
-        userDrop = (
-            <NavDrop ref={div => droppedUserMenu = div}>
-                <Modal 
-                    Title={<>Login</>}
-                    Button={
+    function userDrop() {
+        if(logged) {
+            return (
+                <NavDrop ref={div => droppedUserMenu = div}>
+                    <DropLink to={"/user/" + user.id}>Perfil</DropLink>
+                    <DropLink to={"/user/config/" + user.id}>Configurações</DropLink>
+                    <span onClick={() => setLogged(false)}><Logout /></span>
+                </NavDrop>
+            )
+        } else {
+            return (
+                <NavDrop ref={div => droppedUserMenu = div}>
+                    <Link to="/user/signin">
                         <ButtonSecondary
                             Width="150px"
                             Height="40px"
@@ -111,39 +61,21 @@ const NavUser = () => {
                         >
                             Entrar
                         </ButtonSecondary>
-                    }
-                    Content={
-                        <LoginForm onSubmit={
-                            e => {e.preventDefault();
-                            if(validateForm(Username, UserPassword, setError)) {
-                                handleSignIn();
-                            }}
-                        }>
-                            <ShowError Situation={error}>
-                                {error}
-                            </ShowError>
-                            <InputIcon 
-                                type="text" 
-                                icon={UserIcon}
-                                placeholder="Nome..." 
-                                onChange={e => setUsername(e.target.value)}
-                            />
-                            <InputIcon 
-                                type="password"
-                                icon={KeyIcon}
-                                placeholder="Senha..." 
-                                onChange={e => setUserPassword(e.target.value)}
-                            />
-                            <ButtonPrimary>Enviar</ButtonPrimary>
-                            <LinkForm to="/user/register">Registre-se</LinkForm>
-                            <LinkForm to="/user/passRecover">Recuperar Senha</LinkForm>
-                        </LoginForm>
-                    }
-                />
-                <DropLink to="/user/register">Registrar</DropLink>
-                <DropLink to="/user/passRecover">Recuperar Senha</DropLink>
-            </NavDrop>
-        )
+                    </Link>
+                    <DropLink to="/user/register">Registrar</DropLink>
+                    <DropLink to="/user/passRecover">Recuperar Senha</DropLink>
+                </NavDrop>
+            )
+        }
+    }
+
+    let user;
+    if(logged) {
+        user = localStorage;
+    } else {
+        user = {
+            name: "Faça Login ou Registre-se"
+        }
     }
 
     return (
@@ -161,11 +93,11 @@ const NavUser = () => {
                         <LoginWelcome>Bem vindo,</LoginWelcome>
                         <LoginName>{user.name}</LoginName>
                     </LoginInfos>
-                    {userDrop}
+                    {userDrop()}
                 </LoginWrapper>
             </UserWrapper>
         </>
     )
 }
 
-export default NavUser;
+export default withRouter(NavUser);

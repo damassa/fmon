@@ -12,16 +12,13 @@ import {
 
 const Navbar = () => {
     const [shadow, setShadow] = useState();
-    const [bgColor, setBgColor] = useState();
 
     useEffect(() => {
         const scrollCallBack = window.addEventListener("scroll", () => {
             if (window.pageYOffset > 50) {
                 setShadow('0px 5px 5px 0px rgba(0,0,0,0.25)')
-                setBgColor('rgba(0,0,0,0.5)')
             } else {
                 setShadow('none')
-                setBgColor('transparent')
             }
         })
         return () => {
@@ -31,7 +28,7 @@ const Navbar = () => {
     []);
 
     return (
-        <NavWrapper boxShadow={shadow} background={bgColor}>
+        <NavWrapper boxShadow={shadow}>
             <LogoWrapper to="/">
                 <Logo/>
             </LogoWrapper>
