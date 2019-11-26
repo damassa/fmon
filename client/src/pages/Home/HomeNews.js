@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { formatRelative } from 'date-fns'
+import { ptBR } from 'date-fns/locale'
 
 import { 
     HomeNews as NewsWrapper ,
@@ -19,24 +21,24 @@ import {
 } from '../News/style';
 
 const HomeNews = () => {
-    let [news, setNews] = useState([]);
-    let [newsPhotos, setNewsPhotos] = useState([]);
+    let [news, setNews] = useState([
+        { image: 'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mOs+A8AAfUBeWVBNToAAAAASUVORK5CYII=', title: 'Lorem', authorName: 'Admin', createdAt: new Date(), like: 0, views: 0, },
+        { image: 'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mOs+A8AAfUBeWVBNToAAAAASUVORK5CYII=', title: 'Lorem', authorName: 'Admin', createdAt: new Date(), like: 0, views: 0, },
+        { image: 'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mOs+A8AAfUBeWVBNToAAAAASUVORK5CYII=', title: 'Lorem', authorName: 'Admin', createdAt: new Date(), like: 0, views: 0, },
+        { image: 'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mOs+A8AAfUBeWVBNToAAAAASUVORK5CYII=', title: 'Lorem', authorName: 'Admin', createdAt: new Date(), like: 0, views: 0, }
+    ]);
+    let data = JSON.stringify({limit: 4});
 
     fetch("http://localhost:4000/api/news", {
-        method: "GET"
+        method: "POST",
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+        },
+        body: data
     }).then(response => {
         response.json().then(values => {
             setNews(values);
-
-            values.map((element, key) => (
-                fetch("http://localhost:4000/api/news/image/" + element.id, {
-                method: "GET"
-                }).then(response => {
-                    response.json().then(val => {
-                        setNewsPhotos(val.image);
-                    })
-                })
-            ));
         })
     })
 
@@ -50,12 +52,14 @@ const HomeNews = () => {
             <NewsBody>
                 {news.map((element, index) => (
                     <NewsCard key={index}>
-                        <NewsImage Image={newsPhotos[element.id]}/>
+                        <NewsImage Image={"data:image/png;base64," + element.image}/>
                         <NewsTitle>{element.title}</NewsTitle>
                         <NewsInfos>
                             <div>
-                                <NewsAuthor>{element.author}</NewsAuthor>
-                                <NewsDate>{element.createdAt}</NewsDate>
+                                <NewsAuthor>{element.authorName}</NewsAuthor>
+                                <NewsDate>
+                                    {formatRelative(new Date(element.createdAt), new Date(),{ locale: ptBR }) }
+                                </NewsDate>
                             </div>
                             <div>
                                 <NewsLikes>{element.likes}</NewsLikes>

@@ -27,7 +27,7 @@ export const LoginForm = styled.form`
 
 export const FormTitle = styled.div`
     width: 100%;
-    padding: 2vh 2vw;
+    padding: 3vh 2vw;
     margin-bottom: 2vh;
 
     display: flex;
@@ -38,8 +38,8 @@ export const FormTitle = styled.div`
     background-color: var(--color-1);
     color: #fff;
 
-    border-top-right-radius: 7px;
-    border-top-left-radius: 7px;
+    border-top-right-radius: 9px;
+    border-top-left-radius: 9px;
 `
 
 export const LinkForm = styled(Link)`
