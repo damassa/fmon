@@ -138,7 +138,7 @@ export const LoginWrapper = styled.div`
 
 export const LoginIcon = styled.div`
     width: 25px;
-    height: 25px;
+    height: 75px;
     margin-right: 5px;
 
     background-image: url(${UserIcon});
@@ -151,8 +151,11 @@ export const LoginIcon = styled.div`
 `
 
 export const LoginInfos = styled.div`
+    height: 75px;
+    
     display: flex;
     flex-flow: column nowrap;
+    justify-content: center;
 
     cursor: pointer;
 `
@@ -226,6 +229,7 @@ export const LoginForm = styled.form`
 export const LinkForm = styled(Link)`
     font-size: 14px;
     color: var(--color-1);
+    text-align: center;
     
     transition: 0.5s;
     margin: 1vh 0;
@@ -233,4 +237,15 @@ export const LinkForm = styled(Link)`
     &:hover {
         text-decoration: underline;
     }
+`
+
+export const ShowError = styled.div`
+    width: calc(100% - 20px);
+    margin: 1vh 0;
+    padding: 10px;
+    display: ${props => props.Situation ? "flex" : "none"};
+
+    background-color: var(--color-1);
+    color: #fff;
+    border-radius: 10px;
 `
