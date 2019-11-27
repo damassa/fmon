@@ -96,10 +96,33 @@ exports.listNews = (req, res) => {
 
     console.log(req);
     
-    let sql = `SELECT A.id, A.title, A.text, A.author, C.image, B.name as 'authorName', A.createdAt, A.updatedAt, A.likes, A.views
+    let sql = `SELECT A.id, A.title, C.image, B.name as 'authorName', A.createdAt, A.likes, A.views
     FROM news as A 
     LEFT JOIN users as B ON A.author = B.id 
     LEFT JOIN images as C ON A.image = C.id 
+    ORDER BY A.${sortBy} ${order}
+    LIMIT 0, ${limit}`;
+    db.connect.query(sql, (err, values) => {
+        if(err || !values) {
+            return res.status(400).json({
+                error: err
+            })
+        }
+        
+        return res.status(200).json(values);
+    });
+}
+
+exports.listLowInfosNews = (req, res) => {
+    let order = req.body.order ? req.body.order : 'desc';
+    let sortBy = req.body.sortBy ? req.body.sortBy : 'createdAt';
+    let limit = req.body.limit ? req.body.limit : 4;
+
+    console.log(req);
+    
+    let sql = `SELECT A.id, A.title, A.author, B.name as 'authorName', A.createdAt
+    FROM news as A 
+    LEFT JOIN users as B ON A.author = B.id 
     ORDER BY A.${sortBy} ${order}
     LIMIT 0, ${limit}`;
     db.connect.query(sql, (err, values) => {

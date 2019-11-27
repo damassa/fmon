@@ -1,9 +1,6 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { TimelineLite } from 'gsap/all'
-import { Link, withRouter } from 'react-router-dom';
-
-import { isAuthenticated } from '../../services/auth';
-import Logout from '../User/logout';
+import React, { useEffect, useRef, useState }   from 'react';
+import { TimelineLite }                         from 'gsap/all'
+import {  withRouter }                          from 'react-router-dom';
 
 import { 
     UserWrapper,
@@ -17,8 +14,9 @@ import {
     NavDrop,
     DropLink
 } from './style';
-
-import { ButtonSecondary }  from '../../components/Buttons';
+import { isAuthenticated }  from '../../services/auth';
+import Logout               from '../User/logout';
+import ModalLogin           from '../User/modalLogin';
 
 const NavUser = (props) => {
     let droppedUserMenu = useRef();
@@ -52,16 +50,7 @@ const NavUser = (props) => {
         } else {
             return (
                 <NavDrop ref={div => droppedUserMenu = div}>
-                    <Link to="/user/signin">
-                        <ButtonSecondary
-                            Width="150px"
-                            Height="40px"
-                            Margin="2vh 1vw"
-                            FontSize="12px"
-                        >
-                            Entrar
-                        </ButtonSecondary>
-                    </Link>
+                    <ModalLogin logged={logged} setLogged={setLogged} />
                     <DropLink to="/user/register">Registrar</DropLink>
                     <DropLink to="/user/passRecover">Recuperar Senha</DropLink>
                 </NavDrop>

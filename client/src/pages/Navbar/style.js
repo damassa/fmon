@@ -178,6 +178,8 @@ export const NavDrop = styled.div`
     align-items: center;
     flex-flow: column nowrap;
 
+    box-shadow: 0px 5px 20px 0px rgba(0,0,0,0.5);
+
     background-color: var(--color-1);
 
     &::after {

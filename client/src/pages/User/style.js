@@ -25,6 +25,15 @@ export const LoginForm = styled.form`
     border-radius: 10px;
 `
 
+export const LoginFormModal = styled.form`
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+
+    width: 90%;
+`
+
 export const FormTitle = styled.div`
     width: 100%;
     padding: 3vh 2vw;
@@ -40,6 +49,14 @@ export const FormTitle = styled.div`
 
     border-top-right-radius: 9px;
     border-top-left-radius: 9px;
+`
+
+export const FormTitleModal = styled.div`
+    font-size: 24px;
+    font-weight: bold;
+    color: var(--color-1);
+
+    margin-bottom: 2vh;
 `
 
 export const LinkForm = styled(Link)`

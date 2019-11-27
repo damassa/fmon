@@ -8,7 +8,7 @@ import {
     NewsHeaderTitle,
     NewsBody
 } from './style';
-
+import FastLoad from '../News/fastLoad';
 import {
     NewsCard,
     NewsImage,
@@ -21,12 +21,7 @@ import {
 } from '../News/style';
 
 const HomeNews = () => {
-    let [news, setNews] = useState([
-        { image: 'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mOs+A8AAfUBeWVBNToAAAAASUVORK5CYII=', title: 'Lorem', authorName: 'Admin', createdAt: new Date(), like: 0, views: 0, },
-        { image: 'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mOs+A8AAfUBeWVBNToAAAAASUVORK5CYII=', title: 'Lorem', authorName: 'Admin', createdAt: new Date(), like: 0, views: 0, },
-        { image: 'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mOs+A8AAfUBeWVBNToAAAAASUVORK5CYII=', title: 'Lorem', authorName: 'Admin', createdAt: new Date(), like: 0, views: 0, },
-        { image: 'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mOs+A8AAfUBeWVBNToAAAAASUVORK5CYII=', title: 'Lorem', authorName: 'Admin', createdAt: new Date(), like: 0, views: 0, }
-    ]);
+    let [news, setNews] = useState(FastLoad);
     let data = JSON.stringify({limit: 4});
 
     fetch("http://localhost:4000/api/news", {
