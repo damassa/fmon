@@ -14,28 +14,21 @@ In the fmon directory
 
 Create a file named ".env", open and paste this informations:
 
-PORT=4000
-
-SECRET=YOUR_SECRET_TOKEN
-
-DB_HOST=YOUR_DATABASE_HOST
-
-DB_PORT=PORT
-
-DB_USER=USER
-
-DB_PASSWORD=PASSWORD
-
-DB_DATABASE=DB
-
-MAX_IMAGE_SIZE=1000000
+	PORT=4000
+	SECRET=YOUR_SECRET_TOKEN
+	DB_HOST=YOUR_DATABASE_HOST
+	DB_PORT=PORT
+	DB_USER=USER
+	DB_PASSWORD=PASSWORD
+	DB_DATABASE=DB
+	MAX_IMAGE_SIZE=1000000
 
 And you can start.
 
-  yarn start
+	yarn start
   
 ### Client Side
 
 Just verify if the port is correctly configured, and you can start.
 
-  yarn start
+	yarn start
