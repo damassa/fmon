@@ -192,7 +192,7 @@ export const NewsBody = styled.div`
 export const NewsCards = styled.div`
     display: flex;
     flex-flow: column nowrap;
-    justify-content: space-between;
+    align-items: center;
     flex-grow: 3;
 
     margin-right: 10vw;

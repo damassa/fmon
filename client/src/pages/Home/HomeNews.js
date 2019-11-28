@@ -8,7 +8,7 @@ import {
     NewsHeaderTitle,
     NewsBody
 } from './style';
-import FastLoad from '../News/fastLoad';
+import { fastLoad4 } from '../News/fastLoad';
 import {
     NewsCard,
     NewsImage,
@@ -21,7 +21,7 @@ import {
 } from '../News/style';
 
 const HomeNews = () => {
-    let [news, setNews] = useState(FastLoad);
+    let [news, setNews] = useState(fastLoad4);
     let data = JSON.stringify({limit: 4});
 
     fetch("http://localhost:4000/api/news", {
