@@ -4,7 +4,7 @@ The FMON is the biggest site of Football Manager E-Sport, and this project is th
 
 ## Quick Start
 
-git clone https://github.com/lpeil/fmon
+	git clone https://github.com/lpeil/fmon
 
 ### Server Side
 
