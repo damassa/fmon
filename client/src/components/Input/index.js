@@ -23,3 +23,7 @@ export const InputIcon = styled(Input)`
     background-repeat: no-repeat;
     padding-left: calc(4% + 16px);
 `
+
+export const InputIconWeak = styled(InputIcon)`
+    border-color: #aaa;
+`

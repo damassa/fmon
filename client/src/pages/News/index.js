@@ -28,7 +28,8 @@ import {
     MenuCardSubText,
     MenuCardWrapper
 } from './style';
-import Footer from '../Footer';
+import Footer       from '../Footer';
+import SearchCard   from './searchCard';
 
 const News = () => {
     let [news, setNews] = useState(fastLoad2);
@@ -43,7 +44,7 @@ const News = () => {
 
     function loadMoreNews() {
         if(!loadingNews) {
-            setLimitNews(limitNews + 2);
+            setLimitNews(limitNews += 2);
             setLoadingNews(true);
         }
     }
@@ -59,7 +60,6 @@ const News = () => {
         }).then(response => {
             response.json().then(values => {
                 setMostViewed(values);
-                setLoadingNews(false);
             })
         })
 
@@ -86,6 +86,7 @@ const News = () => {
         }).then(response => {
             response.json().then(values => {
                 setNews(values);
+                setLoadingNews(false);
             })
         })
     });
@@ -127,6 +128,10 @@ const News = () => {
                         </ButtonPrimary>
                     </NewsCards>
                     <NewsRightMenu>
+                        <MenuCard>
+                            <MenuCardTitle>PESQUISA</MenuCardTitle>
+                            <SearchCard />
+                        </MenuCard>
                         <MenuCard>
                             <MenuCardTitle>MAIS VISTAS</MenuCardTitle>
                             {mostViewed.map((element, index) => (

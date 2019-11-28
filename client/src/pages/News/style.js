@@ -262,3 +262,18 @@ export const MenuCardWrapper = styled(Link)`
         color: var(--color-1);
     }
 `
+
+export const SearchResult = styled.div`
+    display: flex;
+    flex-flow: column nowrap;
+
+    margin: 2vh 0;
+    color: #000;
+`
+
+export const SearchWrapper = styled.div`
+    max-width: 100%;
+    
+    display: flex;
+    flex-flow: column nowrap;
+`

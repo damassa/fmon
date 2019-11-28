@@ -93,8 +93,6 @@ exports.listNews = (req, res) => {
     let order = req.body.order ? req.body.order : 'desc';
     let sortBy = req.body.sortBy ? req.body.sortBy : 'createdAt';
     let limit = req.body.limit ? req.body.limit : 6;
-
-    console.log(req);
     
     let sql = `SELECT A.id, A.title, C.image, B.name as 'authorName', A.createdAt, A.likes, A.views
     FROM news as A 
@@ -117,8 +115,6 @@ exports.listLowInfosNews = (req, res) => {
     let order = req.body.order ? req.body.order : 'desc';
     let sortBy = req.body.sortBy ? req.body.sortBy : 'createdAt';
     let limit = req.body.limit ? req.body.limit : 4;
-
-    console.log(req);
     
     let sql = `SELECT A.id, A.title, A.author, B.name as 'authorName', A.createdAt
     FROM news as A 
@@ -154,4 +150,24 @@ exports.getImage = (req, res) => {
             return res.status(200).json(val[0])
         })
     })
+}
+
+exports.searchNews = (req, res) => {
+    let text = req.body.text ? req.body.text : '';
+    
+    let sql = `SELECT A.id, A.title, A.author, B.name as 'authorName', A.createdAt
+    FROM news as A 
+    LEFT JOIN users as B ON A.author = B.id 
+    WHERE A.title LIKE '%${text}%'
+    ORDER BY A.createdAt desc
+    LIMIT 0, 4`;
+    db.connect.query(sql, (err, values) => {
+        if(err || !values) {
+            return res.status(400).json({
+                error: err
+            })
+        }
+        
+        return res.status(200).json(values);
+    });
 }
