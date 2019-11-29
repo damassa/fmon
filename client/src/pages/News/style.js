@@ -10,7 +10,7 @@ import purpleBg         from '../../assets/news/purple-bg.png';
 import leftEffect       from '../../assets/news/left-effect.svg';
 import rightEffect      from '../../assets/news/right-effect.svg';
 
-export const NewsCard = styled.div`
+export const NewsCard = styled(Link)`
     width: 100%;
     padding: 4vh 0;
     
@@ -276,4 +276,46 @@ export const SearchWrapper = styled.div`
     
     display: flex;
     flex-flow: column nowrap;
+`
+
+export const NewsEndAlert = styled.div`
+    color: var(--color-1);
+    font-size: 18px;
+    
+    margin: 2vh 0;
+`
+
+export const NoticePage = styled.div`
+    width: 70vw;
+    padding: 0 10vw;
+    margin-top: 100px;
+
+    display: flex;
+    flex-flow: column;
+`
+
+export const NoticeHeader = styled.div`
+    display: flex;
+    flex-flow: column;
+`
+
+export const NoticeTitle = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 32px;
+    font-weight: bold;
+    color: var(--color-1);
+`
+
+export const NoticeAuthor = styled.div`
+    font-size: 18px;
+
+    margin: 1vh 0;
+`
+
+export const NoticeDate = styled.div`
+    font-size: 16px;
+    color: #aaa;
 `

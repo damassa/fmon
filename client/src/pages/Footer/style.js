@@ -19,6 +19,8 @@ export const FooterWrapper = styled.div`
 `
 
 export const FooterTitle = styled.div`
+    position: relative;
+
     font-size: 32px;
     font-weight: bold;
     color: #fff;
@@ -34,6 +36,7 @@ export const FooterSocials = styled.div`
 `
 
 export const Social = styled.a`
+    position: relative;
     display: flex;
     flex-flow: column nowrap;
     justify-content: center;
@@ -43,6 +46,20 @@ export const Social = styled.a`
 
     &:hover div {
         background-size: 100%;
+    }
+
+    &:after {
+        content: "";
+        position: absolute;
+        height: 100px;
+        margin-left: 80px;
+        
+        transform: skew(-18deg);
+        border-right: 1px solid #fffd5e;
+    }
+
+    &:last-child:after {
+        border: none;
     }
 `
 

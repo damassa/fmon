@@ -4,7 +4,10 @@ import { ptBR } from 'date-fns/locale'
 
 import { fastLoad2 }        from './fastLoad';
 import { ButtonPrimary }    from '../../components/Buttons';
+import { InputIconWeak }    from '../../components/Input';
+import searchIcon           from '../../assets/icons/search.svg';
 import {
+    SearchResult,
     NewsWrapper,
     NewsHeader,
     NewsHeaderText,
@@ -26,10 +29,10 @@ import {
     MenuCardText,
     MenuCardUnder,
     MenuCardSubText,
-    MenuCardWrapper
+    MenuCardWrapper,
+    NewsEndAlert
 } from './style';
-import Footer       from '../Footer';
-import SearchCard   from './searchCard';
+import Footer from '../Footer';
 
 const News = () => {
     let [news, setNews] = useState(fastLoad2);
@@ -37,15 +40,56 @@ const News = () => {
     let [mostLiked, setMostLiked] = useState([]);
     let [limitNews, setLimitNews] = useState(2);
     let [loadingNews, setLoadingNews] = useState(false);
-
-    let dataNews = JSON.stringify({limit: limitNews});
-    let dataMostViewed = JSON.stringify({limit: 4, order: "desc", sortBy: "views"});
-    let dataLiked = JSON.stringify({limit: 4, order: "desc", sortBy: "likes"});
+    let [search, setSearch] = useState([]);
+    let [loadindSearch, setLoadindSearch] = useState(false);
+    let [endNews, setEndNews] = useState(false);
 
     function loadMoreNews() {
         if(!loadingNews) {
             setLimitNews(limitNews += 2);
             setLoadingNews(true);
+
+            fetch("http://localhost:4000/api/news", {
+                method: "POST",
+                headers: {
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({limit: limitNews}),
+            }).then(response => {
+                response.json().then(values => {
+                    setNews(values);
+                    setLoadingNews(false);
+
+                    console.log(limitNews);
+                    if(limitNews > values.length) {
+                        setEndNews(true);
+                    }
+                })
+            });
+        }
+    }
+
+    function searchFetch(value) {
+        setLoadindSearch(true);
+
+        if(value) {
+            fetch("http://localhost:4000/api/news/searchNews", {
+                method: "POST",
+                headers: {
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({text: value})
+            }).then(response => {
+                response.json().then(values => {
+                    setSearch(values);
+                    setLoadindSearch(false);
+                })
+            })
+        } else {
+            setSearch([]);
+            setLoadindSearch(false);
         }
     }
 
@@ -56,7 +100,7 @@ const News = () => {
                 Accept: 'application/json',
                 'Content-Type': 'application/json',
             },
-            body: dataMostViewed
+            body: JSON.stringify({limit: 4, order: "desc", sortBy: "views"}),
         }).then(response => {
             response.json().then(values => {
                 setMostViewed(values);
@@ -69,7 +113,7 @@ const News = () => {
                 Accept: 'application/json',
                 'Content-Type': 'application/json',
             },
-            body: dataLiked
+            body: JSON.stringify({limit: 4, order: "desc", sortBy: "likes"}),
         }).then(response => {
             response.json().then(values => {
                 setMostLiked(values);
@@ -82,14 +126,15 @@ const News = () => {
                 Accept: 'application/json',
                 'Content-Type': 'application/json',
             },
-            body: dataNews
+            body: JSON.stringify({limit: limitNews}),
         }).then(response => {
             response.json().then(values => {
                 setNews(values);
                 setLoadingNews(false);
             })
         })
-    });
+    // eslint-disable-next-line
+    }, []);
 
     return (
         <>
@@ -103,7 +148,7 @@ const News = () => {
                 <NewsBody>
                     <NewsCards>
                         {news.map((element, index) => (
-                            <NewsCard key={index}>
+                            <NewsCard to={"/news/" + element.id} key={index}>
                                 <NewsImage Image={"data:image/png;base64," + element.image}/>
                                 <NewsTitle>{element.title}</NewsTitle>
                                 <NewsInfos>
@@ -120,17 +165,43 @@ const News = () => {
                                 </NewsInfos>
                             </NewsCard>
                         ))}
-                        <ButtonPrimary 
-                            Width="50%"
-                            onClick={() => loadMoreNews()}
-                        >
-                            {loadingNews ? "Carregando..." : "Carregar Mais"}
-                        </ButtonPrimary>
+                        {endNews ?
+                            (<NewsEndAlert>Acabou</NewsEndAlert>) :
+                            (<ButtonPrimary 
+                                Width="50%"
+                                onClick={() => loadMoreNews()}
+                            >
+                                {loadingNews ? "Carregando..." : "Carregar Mais"}
+                            </ButtonPrimary>)
+                        }
                     </NewsCards>
                     <NewsRightMenu>
                         <MenuCard>
                             <MenuCardTitle>PESQUISA</MenuCardTitle>
-                            <SearchCard />
+                            <InputIconWeak 
+                                placeholder="Pesquisar..." 
+                                icon={searchIcon} 
+                                onChange={(val) => searchFetch(val.target.value)}
+                            />
+                            <SearchResult>
+                                {
+                                    loadindSearch ?
+                                    (<span>Pesquisando...</span>) :
+                                    search.map((element, index) => (
+                                        <MenuCardWrapper to={"/news/" + element.id} key={index}>
+                                            <MenuCardText>
+                                                {element.title}
+                                            </MenuCardText>
+                                            <MenuCardUnder>
+                                                <MenuCardSubText>{element.authorName}</MenuCardSubText>
+                                                <MenuCardSubText>
+                                                    {formatRelative(new Date(element.createdAt), new Date(),{ locale: ptBR }) }
+                                                </MenuCardSubText>
+                                            </MenuCardUnder>
+                                        </MenuCardWrapper>
+                                    ))
+                                }
+                            </SearchResult>
                         </MenuCard>
                         <MenuCard>
                             <MenuCardTitle>MAIS VISTAS</MenuCardTitle>

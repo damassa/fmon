@@ -69,7 +69,7 @@ exports.createNews = (req, res) => {
 }
 
 exports.newsById = (req, res, next, id) => {
-    let sql = `SELECT A.id, A.title, A.text, A.author, B.name as 'authorName', A.createdAt, A.updatedAt, A.likes, A.views
+    let sql = `SELECT A.id, A.title, C.image, A.text, A.author, B.name as 'authorName', A.createdAt, A.updatedAt, A.likes, A.views
     FROM news as A 
     LEFT JOIN users as B ON A.author = B.id 
     LEFT JOIN images as C ON A.image = C.id 

@@ -31,6 +31,7 @@ export const HomeInfos = styled.div`
 
 export const NewsHeader = styled.div`
     height: 50px;
+    margin-bottom: 4vh;
 
     display: flex;
     flex-flow: row nowrap;

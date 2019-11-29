@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { formatRelative } from 'date-fns'
 import { ptBR } from 'date-fns/locale'
 
@@ -24,18 +24,21 @@ const HomeNews = () => {
     let [news, setNews] = useState(fastLoad4);
     let data = JSON.stringify({limit: 4});
 
-    fetch("http://localhost:4000/api/news", {
-        method: "POST",
-        headers: {
-            Accept: 'application/json',
-            'Content-Type': 'application/json',
-        },
-        body: data
-    }).then(response => {
-        response.json().then(values => {
-            setNews(values);
+    useEffect(() => {
+        fetch("http://localhost:4000/api/news", {
+            method: "POST",
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: data
+        }).then(response => {
+            response.json().then(values => {
+                setNews(values);
+            })
         })
-    })
+    // eslint-disable-next-line
+    }, []);
 
     return (
         <NewsWrapper>
@@ -46,7 +49,7 @@ const HomeNews = () => {
             </NewsHeader>
             <NewsBody>
                 {news.map((element, index) => (
-                    <NewsCard key={index}>
+                    <NewsCard to={"/news/" + element.id} key={index}>
                         <NewsImage Image={"data:image/png;base64," + element.image}/>
                         <NewsTitle>{element.title}</NewsTitle>
                         <NewsInfos>

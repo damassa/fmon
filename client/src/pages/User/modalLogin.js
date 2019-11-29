@@ -27,6 +27,7 @@ const ModalLogin = (props) => {
     const [Username, setUsername] = useState("");
     const [UserPassword, setUserPassword] = useState("");
     const [error, setError] = useState(null);
+    const [formHeight, setFormHeight] = useState('');
     const data = JSON.stringify({name: Username, password: UserPassword});
     let modal = useRef();
     let modalWrapper = useRef();
@@ -88,18 +89,25 @@ const ModalLogin = (props) => {
             setTimeout(() => {
                 modalAnimation.reverse();
             }, 2000);
+            
+            if(!formHeight) {
+                setFormHeight("30px");
+            }
 
             return (
                 <span>Bem vindo, {Username}!</span>
             )
         } else {
             return (
-                <LoginFormModal onSubmit={
-                    e => {e.preventDefault();
-                    if(validateForm(Username, UserPassword, setError)) {
-                        handleSignIn();
-                    }}
-                }>
+                <LoginFormModal 
+                    onSubmit={
+                        e => {e.preventDefault();
+                        if(validateForm(Username, UserPassword, setError)) {
+                            handleSignIn();
+                        }}
+                    }
+                    height={formHeight}
+                >
                     <FormTitleModal>Login</FormTitleModal>
                     <ShowError Situation={error}>
                         {error}

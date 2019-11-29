@@ -4,7 +4,7 @@ import { Body } from './components/style.js'
 
 import Navbar           from './pages/Navbar';
 import Home             from './pages/Home';
-import News             from './pages/News';
+import NewsRoutes       from './pages/News/routes';
 import Championships    from './pages/Championships';
 import UserRoutes       from './pages/User/routes'
 
@@ -15,8 +15,8 @@ const Routes = () => {
             <Body>
                 <Switch>
                     <Route path="/"                 exact={true} component={Home} />
-                    <Route path="/news"             exact={true} component={News} />
                     <Route path="/championships"    exact={true} component={Championships} />
+                    <NewsRoutes />
                     <UserRoutes />
                 </Switch>
             </Body>
