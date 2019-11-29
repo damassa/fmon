@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 
+import api from '../../services/api';
+
 import { login }            from '../../services/auth';
 import { ButtonPrimary }    from '../../components/Buttons';
 import { InputIcon }        from '../../components/Input';
@@ -34,7 +36,7 @@ const Login = (props) => {
     }
 
     const handleSignIn = async e => {
-        fetch("http://localhost:4000/api/user/signin", {
+        fetch(api + "/user/signin", {
             method: "POST",
             headers: {
                 Accept: 'application/json',

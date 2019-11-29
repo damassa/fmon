@@ -5,7 +5,7 @@ import userIcon         from '../../assets/icons/user-color.svg';
 import dateIcon         from '../../assets/icons/date.svg';
 import eyeIcon          from '../../assets/icons/eye.svg';
 import likeIcon         from '../../assets/icons/heart.svg';
-//import likeFilledIcon   from '../../assets/icons/heart-filled.svg';
+import likeFilledIcon   from '../../assets/icons/heart-filled.svg';
 import purpleBg         from '../../assets/news/purple-bg.png';
 import leftEffect       from '../../assets/news/left-effect.svg';
 import rightEffect      from '../../assets/news/right-effect.svg';
@@ -318,4 +318,72 @@ export const NoticeAuthor = styled.div`
 export const NoticeDate = styled.div`
     font-size: 16px;
     color: #aaa;
+`
+
+export const NoticeImage = styled.div`
+    height: 40vh;
+    max-width: 60%;
+
+    margin: 2vh 20%;
+
+    background-image: url(${props => props.Image});
+    background-size: cover;
+    background-position: center top;
+    background-repeat: no-repeat;
+`
+
+export const NoticeBody = styled.div`
+    display: flex;
+    margin: 2vh 0 2vh 0;
+`
+
+export const NoticeFooter = styled.div`
+    width: 100%;
+    margin: 5vh 0 8vh 0;
+    
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+`
+
+export const LikeWrapper = styled.div`
+    display: flex;
+    flex-direction: row;
+`
+
+export const SocialShare = styled.div`
+    display: flex;
+    flex-direction: row;
+`
+
+export const LikeButton = styled.div`
+    height: 20px;
+    padding-left: 30px;
+
+    color: var(--color-1);
+
+    background-image: url(${props => props.Liked ? likeIcon : likeFilledIcon });
+    background-size: contain;
+    background-position: left center;
+    background-repeat: no-repeat;
+
+    transition: 0.4s;
+    cursor: pointer;
+
+    &:hover {
+        background-image: url(${likeIcon});
+    }
+`
+
+export const Social = styled.a`
+    width: 30px;
+    height: 30px;
+
+    margin: 0 0.5vw;
+
+    background-image: url(${props => props.Image });
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
 `

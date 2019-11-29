@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 
+import api from '../../services/api';
+
 import { ButtonPrimary }    from '../../components/Buttons';
 import { InputIcon }        from '../../components/Input';
 import UserIcon             from '../../assets/icons/user-color.svg'
 import KeyIcon              from '../../assets/icons/key.svg'
 import EmailIcon            from '../../assets/icons/email.svg'
-
 import {
     LoginWrapper,
     LoginForm,
@@ -64,7 +65,7 @@ const Register = (props) => {
     }
 
     const handleSignIn = async e => {
-        fetch("http://localhost:4000/api/user/signup", {
+        fetch(api+"/user/signup", {
             method: "POST",
             headers: {
                 Accept: 'application/json',

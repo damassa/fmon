@@ -42,7 +42,7 @@ export const Social = styled.a`
     justify-content: center;
     align-items: center;
 
-    margin: 0 2vw;
+    margin: 0 2vw 0 2.5vw;
 
     &:hover div {
         background-size: 100%;

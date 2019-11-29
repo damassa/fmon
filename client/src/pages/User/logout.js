@@ -3,6 +3,7 @@ import { Redirect } from 'react-router-dom';
 
 import { ButtonSecondary } from '../../components/Buttons'; 
 
+import api from '../../services/api';
 import { logout as action, getToken } from '../../services/auth'
 
 const Logout = () => {
@@ -11,7 +12,7 @@ const Logout = () => {
     const logout = () => {
         action();
 
-        fetch("http://localhost:4000/api/user/signout", {
+        fetch(api+"/user/signout", {
             method: "GET",
             headers: {
                 Accept: 'application/json',

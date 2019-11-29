@@ -69,10 +69,11 @@ exports.createNews = (req, res) => {
 }
 
 exports.newsById = (req, res, next, id) => {
-    let sql = `SELECT A.id, A.title, C.image, A.text, A.author, B.name as 'authorName', A.createdAt, A.updatedAt, A.likes, A.views
+    let sql = `SELECT A.id, A.title, C.image, A.text, A.author, B.name as 'authorName', A.createdAt, A.updatedAt, COUNT(D.id) as 'likes', A.views
     FROM news as A 
     LEFT JOIN users as B ON A.author = B.id 
     LEFT JOIN images as C ON A.image = C.id 
+    LEFT JOIN news_likes as D ON A.id = D.news
     WHERE A.id = ?`;
     db.connect.query(sql, [id], (err, values) => {
         if(err || !values) {
@@ -87,6 +88,9 @@ exports.newsById = (req, res, next, id) => {
 
 exports.readOneNews = (req, res) => {
     res.status(200).json(req.news);
+
+    let sql = `UPDATE news SET views = views + 1 WHERE id = ${req.news.id}`;
+    db.connect.query(sql);
 }
 
 exports.listNews = (req, res) => {
@@ -94,10 +98,12 @@ exports.listNews = (req, res) => {
     let sortBy = req.body.sortBy ? req.body.sortBy : 'createdAt';
     let limit = req.body.limit ? req.body.limit : 6;
     
-    let sql = `SELECT A.id, A.title, C.image, B.name as 'authorName', A.createdAt, A.likes, A.views
+    let sql = `SELECT A.id, A.title, C.image, B.name as 'authorName', A.createdAt, COUNT(D.id) as 'likes', A.views
     FROM news as A 
     LEFT JOIN users as B ON A.author = B.id 
     LEFT JOIN images as C ON A.image = C.id 
+    LEFT JOIN news_likes as D ON A.id = D.news
+    GROUP BY A.id
     ORDER BY A.${sortBy} ${order}
     LIMIT 0, ${limit}`;
     db.connect.query(sql, (err, values) => {
@@ -128,7 +134,7 @@ exports.listLowInfosNews = (req, res) => {
             })
         }
         
-        return res.status(200).json(values);
+        res.status(200).json(values);
     });
 }
 
@@ -169,5 +175,40 @@ exports.searchNews = (req, res) => {
         }
         
         return res.status(200).json(values);
+    });
+}
+
+exports.likeNews = (req, res) => {
+    let news = req.body.news;
+    let user = req.auth.id;
+
+    let sql = `INSERT INTO news_likes (user, news) VALUES (?, ?)`;
+    db.connect.query(sql, [user, news], (err, values) => {
+        if(err || !values) {
+            if(err.code === "ER_DUP_ENTRY") {
+                let sql = `DELETE FROM news_likes WHERE news = ? and user = ?`
+                db.connect.query(sql, [news, user], (err, values) => {
+                    return res.status(200).json({ message: 'desliked' });
+                })
+            } else {
+                return res.status(400).json({ error: err });
+            }
+        } else {
+            return res.status(200).json({ message: 'liked' });
+        }
+    })
+}
+
+exports.checkLike = (req, res) => {
+    let news = req.body.news;
+    let user = req.user.id;
+
+    let sql = `SELECT id FROM news_likes WHERE user = ? and news = ?`;
+    db.connect.query(sql, [user, news], (err, values) => {
+        if(err || !values[0]) {
+            return res.status(200).json({ like: false });
+        } else {
+            return res.status(200).json({ like: true });
+        }
     });
 }

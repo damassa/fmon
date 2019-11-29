@@ -17,7 +17,9 @@ const {
     listNews,
     listLowInfosNews,
     getImage,
-    searchNews
+    searchNews,
+    likeNews,
+    checkLike
 } = require('./Controller');
 
 router.post("/news/create/:userId", requireSignin, isAuth, createNews);
@@ -26,6 +28,8 @@ router.post("/news/", listNews);
 router.post("/news/lowInfos", listLowInfosNews);
 router.post("/news/searchNews", searchNews);
 router.get("/news/image/:newsId", getImage);
+router.post("/news/like/:userId", requireSignin, isAuth, likeNews);
+router.post("/news/checkLike/:userId", checkLike);
 
 router.param('userId', userById);
 router.param('newsId', newsById);

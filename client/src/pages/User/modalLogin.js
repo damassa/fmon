@@ -1,6 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { TimelineLite } from 'gsap/all'
 
+import api from '../../services/api';
+
 import { login }            from '../../services/auth';
 import { ButtonSecondary }  from '../../components/Buttons';
 import { ButtonPrimary }    from '../../components/Buttons';
@@ -61,7 +63,7 @@ const ModalLogin = (props) => {
     }
 
     const handleSignIn = async e => {
-        fetch("http://localhost:4000/api/user/signin", {
+        fetch(api+"/user/signin", {
             method: "POST",
             headers: {
                 Accept: 'application/json',

@@ -18,19 +18,19 @@ const Footer = () => {
         <FooterWrapper>
             <FooterTitle>SIGA O FMON</FooterTitle>
             <FooterSocials>
-                <Social href="https://www.facebook.com/footballmanageron/">
+                <Social href="https://www.facebook.com/footballmanageron/" target="_blank">
                     <Icon Image={FacebookIcon} />
                     <SocialText>FACEBOOK</SocialText>
                 </Social>
-                <Social href="https://twitter.com/_fmon">
+                <Social href="https://twitter.com/_fmon" target="_blank">
                     <Icon Image={TwitterIcon} />
-                    <SocialText>YOUTUBE</SocialText>
-                </Social>
-                <Social href="https://www.youtube.com/channel/UCcsT5Dw6znI6ELytWoBHRNQ">
-                    <Icon Image={YoutubeIcon} />
                     <SocialText>TWITTER</SocialText>
                 </Social>
-                <Social href="https://chat.whatsapp.com/BgGYfBqKWTz6tlpIFdw8RC">
+                <Social href="https://www.youtube.com/channel/UCcsT5Dw6znI6ELytWoBHRNQ" target="_blank">
+                    <Icon Image={YoutubeIcon} />
+                    <SocialText>YOUTUBE</SocialText>
+                </Social>
+                <Social href="https://chat.whatsapp.com/BgGYfBqKWTz6tlpIFdw8RC" target="_blank">
                     <Icon Image={WhatsappIcon} />
                     <SocialText>WHATSAPP</SocialText>
                 </Social>

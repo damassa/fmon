@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { formatRelative } from 'date-fns'
 import { ptBR } from 'date-fns/locale'
 
+import api from '../../services/api';
+
 import { fastLoad2 }        from './fastLoad';
 import { ButtonPrimary }    from '../../components/Buttons';
 import { InputIconWeak }    from '../../components/Input';
@@ -49,7 +51,7 @@ const News = () => {
             setLimitNews(limitNews += 2);
             setLoadingNews(true);
 
-            fetch("http://localhost:4000/api/news", {
+            fetch(api +"/news", {
                 method: "POST",
                 headers: {
                     Accept: 'application/json',
@@ -74,7 +76,7 @@ const News = () => {
         setLoadindSearch(true);
 
         if(value) {
-            fetch("http://localhost:4000/api/news/searchNews", {
+            fetch(api +"/news/searchNews", {
                 method: "POST",
                 headers: {
                     Accept: 'application/json',
@@ -94,7 +96,7 @@ const News = () => {
     }
 
     useEffect(() => {
-        fetch("http://localhost:4000/api/news/lowInfos", {
+        fetch(api +"/news/lowInfos", {
             method: "POST",
             headers: {
                 Accept: 'application/json',
@@ -107,7 +109,7 @@ const News = () => {
             })
         })
 
-        fetch("http://localhost:4000/api/news/lowInfos", {
+        fetch(api +"/news/lowInfos", {
             method: "POST",
             headers: {
                 Accept: 'application/json',
@@ -120,7 +122,7 @@ const News = () => {
             })
         })
 
-        fetch("http://localhost:4000/api/news", {
+        fetch(api +"/news", {
             method: "POST",
             headers: {
                 Accept: 'application/json',

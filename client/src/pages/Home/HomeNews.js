@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { formatRelative } from 'date-fns'
 import { ptBR } from 'date-fns/locale'
 
+import api from '../../services/api';
+
 import { 
     HomeNews as NewsWrapper ,
     NewsHeader,
@@ -25,7 +27,7 @@ const HomeNews = () => {
     let data = JSON.stringify({limit: 4});
 
     useEffect(() => {
-        fetch("http://localhost:4000/api/news", {
+        fetch(api+"/news", {
             method: "POST",
             headers: {
                 Accept: 'application/json',
