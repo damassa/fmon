@@ -102,7 +102,7 @@ const News = () => {
                 Accept: 'application/json',
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({limit: 4, order: "desc", sortBy: "views"}),
+            body: JSON.stringify({limit: 4, order: "desc", sortBy: "A.views"}),
         }).then(response => {
             response.json().then(values => {
                 setMostViewed(values);
@@ -115,7 +115,7 @@ const News = () => {
                 Accept: 'application/json',
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({limit: 4, order: "desc", sortBy: "likes"}),
+            body: JSON.stringify({limit: 4, order: "desc", sortBy: "COUNT(C.id)"}),
         }).then(response => {
             response.json().then(values => {
                 setMostLiked(values);
@@ -143,14 +143,14 @@ const News = () => {
             <NewsWrapper>
                 <NewsHeader>
                     <NewsHeaderText>
-                        <NewsHeaderTitle>Nóticias FMON</NewsHeaderTitle>
-                        <NewsHeaderSubTitle>As últimas nóticias sobre os nossos Campeonatos e o universo FM</NewsHeaderSubTitle>
+                        <NewsHeaderTitle>Notícias FMON</NewsHeaderTitle>
+                        <NewsHeaderSubTitle>As últimas notícias sobre os nossos Campeonatos e o universo FM</NewsHeaderSubTitle>
                     </NewsHeaderText>
                 </NewsHeader>
                 <NewsBody>
                     <NewsCards>
                         {news.map((element, index) => (
-                            <NewsCard to={"/news/" + element.id} key={index}>
+                            <NewsCard to={"/news/read/" + element.id} key={index}>
                                 <NewsImage Image={"data:image/png;base64," + element.image}/>
                                 <NewsTitle>{element.title}</NewsTitle>
                                 <NewsInfos>
@@ -190,7 +190,7 @@ const News = () => {
                                     loadindSearch ?
                                     (<span>Pesquisando...</span>) :
                                     search.map((element, index) => (
-                                        <MenuCardWrapper to={"/news/" + element.id} key={index}>
+                                        <MenuCardWrapper to={"/news/read/" + element.id} key={index}>
                                             <MenuCardText>
                                                 {element.title}
                                             </MenuCardText>
@@ -208,7 +208,7 @@ const News = () => {
                         <MenuCard>
                             <MenuCardTitle>MAIS VISTAS</MenuCardTitle>
                             {mostViewed.map((element, index) => (
-                                <MenuCardWrapper to={"/news/" + element.id} key={index}>
+                                <MenuCardWrapper to={"/news/read/" + element.id} key={index}>
                                     <MenuCardText>
                                         {element.title}
                                     </MenuCardText>
@@ -224,7 +224,7 @@ const News = () => {
                         <MenuCard>
                             <MenuCardTitle>MAIS CURTIDAS</MenuCardTitle>
                             {mostLiked.map((element, index) => (
-                                <MenuCardWrapper to={"/news/" + element.id} key={index}>
+                                <MenuCardWrapper to={"/news/read/" + element.id} key={index}>
                                     <MenuCardText>
                                         {element.title}
                                     </MenuCardText>

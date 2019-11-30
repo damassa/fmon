@@ -125,7 +125,9 @@ exports.listLowInfosNews = (req, res) => {
     let sql = `SELECT A.id, A.title, A.author, B.name as 'authorName', A.createdAt
     FROM news as A 
     LEFT JOIN users as B ON A.author = B.id 
-    ORDER BY A.${sortBy} ${order}
+    LEFT JOIN news_likes as C ON A.id = C.news
+    GROUP BY A.id
+    ORDER BY ${sortBy} ${order}
     LIMIT 0, ${limit}`;
     db.connect.query(sql, (err, values) => {
         if(err || !values) {

@@ -42,24 +42,10 @@ export const Social = styled.a`
     justify-content: center;
     align-items: center;
 
-    margin: 0 2vw 0 2.5vw;
+    margin: 0 2vw;
 
     &:hover div {
         background-size: 100%;
-    }
-
-    &:after {
-        content: "";
-        position: absolute;
-        height: 100px;
-        margin-left: 80px;
-        
-        transform: skew(-18deg);
-        border-right: 1px solid #fffd5e;
-    }
-
-    &:last-child:after {
-        border: none;
     }
 `
 

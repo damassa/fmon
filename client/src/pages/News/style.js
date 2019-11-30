@@ -161,6 +161,18 @@ export const NewsHeader = styled.div`
     }
 `
 
+export const NewsHeaderAlt = styled(NewsHeader)`
+    height: 12.5vh;
+
+    &:before {
+        height: calc(100px + 12.5vh);
+    }
+
+    &:after {
+        height: calc(100px + 27.5vh);
+    }
+`
+
 export const NewsHeaderText = styled.div`
     display: flex;
     flex-flow: column nowrap;
@@ -344,7 +356,7 @@ export const NoticeFooter = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-end;
 `
 
 export const LikeWrapper = styled.div`
@@ -354,14 +366,19 @@ export const LikeWrapper = styled.div`
 
 export const SocialShare = styled.div`
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+    align-items: center;
 `
 
 export const LikeButton = styled.div`
-    height: 20px;
-    padding-left: 30px;
+    display: flex;
+    align-items: center;
+
+    height: 25px;
+    padding-left: 35px;
 
     color: var(--color-1);
+    font-size: 20px;
 
     background-image: url(${props => props.Liked ? likeIcon : likeFilledIcon });
     background-size: contain;
@@ -386,4 +403,16 @@ export const Social = styled.a`
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
+`
+
+export const SocialText = styled.div`
+    font-size: 18px;
+    color: var(--color-1);
+
+    margin-bottom: 1.5vh;
+`
+
+export const SocialLinks = styled.div`
+    display: flex;
+    flex-flow: row;
 `

@@ -8,6 +8,10 @@ import { getToken, isAuthenticated } from '../../services/auth';
 import { fastLoad1 }    from './fastLoad';
 import Footer           from '../Footer';
 import { 
+    NewsHeaderAlt,
+    NewsHeaderText,
+    NewsHeaderSubTitle,
+    NewsHeaderTitle,
     NoticePage, 
     NoticeHeader, 
     NoticeTitle,
@@ -19,7 +23,9 @@ import {
     LikeWrapper,
     LikeButton,
     SocialShare,
-    Social
+    Social,
+    SocialLinks,
+    SocialText
 } from './style';
 
 import FacebookIcon from '../../assets/icons/facebook-color.svg';
@@ -104,6 +110,11 @@ const NewsPage = (props) => {
     
     return (
         <>  
+            <NewsHeaderAlt>
+                <NewsHeaderText>
+                    <NewsHeaderTitle>Notícias FMON</NewsHeaderTitle>
+                </NewsHeaderText>
+            </NewsHeaderAlt>
             <NoticePage>
                 <NoticeHeader>
                     <NoticeTitle>{news.title}</NoticeTitle>
@@ -120,21 +131,26 @@ const NewsPage = (props) => {
                         {likeButton()}
                     </LikeWrapper>
                     <SocialShare>
-                        <Social 
-                            Image={FacebookIcon} 
-                            target="_blank" 
-                            href={"https://www.facebook.com/sharer/sharer.php?u=" + window.location.href} 
-                        />
-                        <Social 
-                            Image={TwitterIcon} 
-                            target="_blank" 
-                            href={"https://twitter.com/share?text="+news.title+"&url="+window.location.href+"&hashtags=#FMON"} 
-                        />
-                        <Social 
-                            Image={WhatsappIcon}
-                            target="_blank"
-                            href={"https://api.whatsapp.com/send?text=" + window.location.href} 
-                        />
+                        <SocialText>
+                            Compartilhe:
+                        </SocialText>
+                        <SocialLinks>
+                            <Social 
+                                Image={FacebookIcon} 
+                                target="_blank" 
+                                href={"https://www.facebook.com/sharer/sharer.php?u=" + window.location.href} 
+                            />
+                            <Social 
+                                Image={TwitterIcon} 
+                                target="_blank" 
+                                href={"https://twitter.com/share?text="+news.title+"&url="+window.location.href+"&hashtags=#FMON"} 
+                            />
+                            <Social 
+                                Image={WhatsappIcon}
+                                target="_blank"
+                                href={"https://api.whatsapp.com/send?text=" + window.location.href} 
+                            />
+                        </SocialLinks>
                     </SocialShare>
                 </NoticeFooter>
             </NoticePage>
