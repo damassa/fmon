@@ -36,7 +36,9 @@ const HomeNews = () => {
             body: data
         }).then(response => {
             response.json().then(values => {
-                setNews(values);
+                if(!values.error) {
+                    setNews(values);
+                }
             })
         })
     // eslint-disable-next-line

@@ -5,6 +5,8 @@ import LogoImg                  from '../../assets/logo.png';
 import UserIcon                 from '../../assets/icons/user.svg';
 import NotificationIcon         from '../../assets/icons/notifications.svg';
 import NotificationAtiveIcon    from '../../assets/icons/notifications-active.svg';
+import MenuIcon                 from '../../assets/icons/menu.svg';
+import ArrowDownIcon            from '../../assets/icons/arrow-down-color.svg';
 
 export const NavWrapper = styled.div`
     width: 100vw;
@@ -19,6 +21,10 @@ export const NavWrapper = styled.div`
     background-color: rgba(0,0,0,0.5);
     box-shadow: ${props => props.boxShadow};
     z-index: 2147483648;
+
+    @media only screen and (max-width: 850px) {
+        justify-content: space-between;
+    }
 `
 
 export const LogoWrapper = styled(Link)`
@@ -48,6 +54,14 @@ export const LogoWrapper = styled(Link)`
         border-top-width: 0px;
         border-left: 25px solid var(--color-1);
     }
+
+    @media only screen and (max-width: 330px) {
+        max-width: 80%;
+        
+        &::after {
+            display: none;
+        }
+    }
 `
 
 export const Logo = styled.div`
@@ -69,6 +83,10 @@ export const LinksWrapper = styled.div`
     display: flex;
     flex-grow: 2;
     justify-content: center;
+
+    @media only screen and (max-width: 850px) {
+        display: none;
+    }
 `
 
 export const MenuLinks = styled.div`
@@ -77,6 +95,10 @@ export const MenuLinks = styled.div`
     justify-content: space-evenly;
     
     color: #fff;
+
+    @media only screen and (max-width: 1200px) {
+        width: 95%;
+    }
 `
 
 export const NavLinkWrapper = styled.div`
@@ -104,6 +126,10 @@ export const UserWrapper = styled.div`
     justify-content: space-evenly;
     align-items: center;
     flex-flow: row nowrap;
+
+    @media only screen and (max-width: 850px) {
+        display: none;
+    }
 `
 
 export const NotificationsWrapper = styled.div`
@@ -158,6 +184,10 @@ export const LoginInfos = styled.div`
     justify-content: center;
 
     cursor: pointer;
+
+    @media only screen and (max-width: 1000px) {
+        display: none;
+    }
 `
 
 export const LoginWelcome = styled.div`
@@ -219,4 +249,108 @@ export const NavLinkIcon = styled.div`
     background-position: center;
     background-repeat: no-repeat;
     background-size: contain;
+`
+
+export const MenuMobileIcon = styled.div`
+    display: none;
+
+    @media only screen and (max-width: 850px) {
+        display: flex;
+        position: absolute;
+
+        right: 25px;
+        width: 30px;
+        height: 30px;
+        max-width: 15%;
+
+        background-image: url(${MenuIcon});
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: contain;
+        filter: invert(100%);
+
+        cursor: pointer;
+    }
+
+    @media only screen and (max-width: 330px) {
+        right: 0;
+    }
+`
+
+export const MenuMobile = styled.div`
+    display: none;
+
+    @media only screen and (max-width: 850px) {
+        display: flex;
+        position: absolute;
+        align-items: center;
+        flex-flow: column;
+
+        top: 75px;
+        right: 0;
+        width: 100vw;
+        height: calc(100vh - 75px);
+
+        background-color: #fff;
+        box-shadow: -3px 7px 5px 0px rgba(0,0,0,0.25);
+    }
+`
+
+export const MobileLink = styled(NavLink)`
+    display: flex;
+    justify-content: center;
+
+    width: 100%;
+    padding: 10px 0;
+
+    font-size: 18px;
+    color: var(--color-1);
+    transition: 0.4s;
+
+    & span {
+        border-bottom: 1px solid transparent;
+    }
+
+    &.active span {
+        border-color: var(--color-1);
+    }
+
+    &:hover span {
+        border-color: var(--color-1);
+    }
+`
+
+export const MobileDrop = styled.div`
+    display: flex;
+    justify-content: center;
+
+    width: 100%;
+    padding: 10px 0;
+
+    font-size: 18px;
+    color: var(--color-1);
+
+    cursor: pointer;
+
+    & div:after {
+        content: "";
+        position: absolute;
+
+        margin-left: 5px;
+        margin-top: 3px;
+        width: 15px;
+        height: 15px;
+
+        transform: ${props => props.Active ? "rotate(-90deg)" : "rotate(0)"}; 
+
+        background-image: url(${ArrowDownIcon});
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center; 
+        transition: 0.4s;
+    }
+`
+
+export const MenuDrop = styled.div`
+    display: flex;
 `

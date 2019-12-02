@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
 
-import NavLinks from './navLinks';
-import NavUser  from './navUser';
+import NavLinks     from './navLinks';
+import NavUser      from './navUser';
+import MenuMobile   from './navMobile';
 
 import { 
     NavWrapper, 
     LogoWrapper, 
     Logo,
-    LogoSpace,
+    LogoSpace
 } from './style';
 
 const Navbar = () => {
@@ -35,6 +36,7 @@ const Navbar = () => {
             <LogoSpace />
             <NavLinks />
             <NavUser />
+            <MenuMobile />
         </NavWrapper>
     )
 }
