@@ -16,6 +16,7 @@
     "react-router-dom": "^5.1.2",
     "react-scripts": "^3.2.0",
     "styled-components": "^4.4.1",
+    "suneditor-react": "^2.1.5",
     "validator": "^12.1.0"
   },
   "scripts": {

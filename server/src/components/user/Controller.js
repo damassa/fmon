@@ -106,7 +106,7 @@ exports.isAdmin = (req, res, next) => {
 }
 
 exports.isAuth = (req, res, next) => {
-    if(!req.user) {
+    if(!req.user || !req.auth) {
         return res.status(400).json({
             error: "Access Denied"
         });

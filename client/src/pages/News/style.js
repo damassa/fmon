@@ -346,7 +346,14 @@ export const NoticeImage = styled.div`
 
 export const NoticeBody = styled.div`
     display: flex;
+    flex-flow: column;
+    
     margin: 2vh 0 2vh 0;
+
+    & img {
+        max-width: 100%;
+        height: auto;
+    }
 `
 
 export const NoticeFooter = styled.div`
@@ -415,4 +422,45 @@ export const SocialText = styled.div`
 export const SocialLinks = styled.div`
     display: flex;
     flex-flow: row;
+`
+
+export const FormNews = styled.form`
+    width: 100%;
+    margin: 5vh 0;
+    
+    display: flex;
+    flex-flow: column;
+`
+
+export const FormLabel = styled.label`
+    display: flex;
+    flex-flow: column;
+
+    margin-bottom: 2vh;
+`
+
+export const FormText = styled.span`
+    font-size: 24px;
+    color: var(--color-1);
+    
+    margin-bottom: 2vh;
+`
+
+export const ButtonDiv = styled.div`
+    width: 100%;
+    margin: 2vh 0;
+
+    display: flex;
+    justify-content: center;
+`
+
+export const ShowError = styled.div`
+    width: calc(100% - 20px);
+    margin: 1vh 0;
+    padding: 10px;
+    display: ${props => props.Situation ? "flex" : "none"};
+
+    background-color: var(--color-1);
+    color: #fff;
+    border-radius: 10px;
 `

@@ -10,7 +10,6 @@ import Footer           from '../Footer';
 import { 
     NewsHeaderAlt,
     NewsHeaderText,
-    NewsHeaderSubTitle,
     NewsHeaderTitle,
     NoticePage, 
     NoticeHeader, 

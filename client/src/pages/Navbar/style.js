@@ -18,7 +18,7 @@ export const NavWrapper = styled.div`
 
     background-color: rgba(0,0,0,0.5);
     box-shadow: ${props => props.boxShadow};
-    z-index: 2;
+    z-index: 2147483648;
 `
 
 export const LogoWrapper = styled(Link)`
