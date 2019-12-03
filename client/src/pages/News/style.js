@@ -35,6 +35,10 @@ export const NewsImage = styled.div`
     background-image: url(${props => props.Image});
     background-size: cover;
     background-position: center top;
+
+    @media only screen and (max-width: 500px) {
+        height: 200px;
+    }
 `
 
 export const NewsTitle = styled.div`
@@ -43,6 +47,10 @@ export const NewsTitle = styled.div`
     color: var(--color-1);
 
     margin: 2vh 0;
+
+    @media only screen and (max-width: 800px) {
+        text-align: center;
+    }
 `
 
 export const NewsInfos = styled.div`
@@ -53,6 +61,7 @@ export const NewsInfos = styled.div`
     & div {
         display: flex;
         flex-flow: row wrap;
+        margin: 3px 0;
     }
     
     & div div:first-child {
@@ -80,6 +89,7 @@ export const NewsDate = styled.div`
     display: flex;
 
     padding-left: 25px;
+    padding-right: 15px;
 
     background-image: url(${dateIcon});
     background-size: 18px;
@@ -195,10 +205,14 @@ export const NewsBody = styled.div`
     width: 100%;
 
     display: flex;
-    flex-flow: row nowrap;
+    flex-flow: row wrap-reverse;
     justify-content: space-between;
 
     margin: 5vh 0;
+
+    @media only screen and (max-width: 770px) {
+        flex-flow: column-reverse;
+    }
 `
 
 export const NewsCards = styled.div`
@@ -208,6 +222,10 @@ export const NewsCards = styled.div`
     flex-grow: 3;
 
     margin-right: 10vw;
+
+    @media only screen and (max-width: 770px) {
+        margin-right: 0;
+    }
 `
 
 export const NewsRightMenu = styled.div`
@@ -215,6 +233,8 @@ export const NewsRightMenu = styled.div`
     flex-flow: column nowrap;
     align-items: center;
     flex-grow: 2;
+
+    margin-bottom: 5vh;
     
     color: #fff;
 `
@@ -300,7 +320,7 @@ export const NewsEndAlert = styled.div`
 export const NoticePage = styled.div`
     width: 70vw;
     padding: 0 10vw;
-    margin-top: 100px;
+    margin-top: 5vh;
 
     display: flex;
     flex-flow: column;
@@ -316,6 +336,7 @@ export const NoticeTitle = styled.div`
     justify-content: center;
     align-items: center;
 
+    text-align: center;
     font-size: 32px;
     font-weight: bold;
     color: var(--color-1);
@@ -342,6 +363,16 @@ export const NoticeImage = styled.div`
     background-size: cover;
     background-position: center top;
     background-repeat: no-repeat;
+
+    @media only screen and (max-width: 850px) {
+        width: 100%;
+        max-width: 100%;
+        margin: 2vh 0;
+    }
+
+    @media only screen and (max-width: 500px) {
+        height: 20vh;
+    }
 `
 
 export const NoticeBody = styled.div`

@@ -8,6 +8,10 @@ export const HomeBody = styled.div`
     justify-content: space-between;
 
     margin: 5vh 0;
+
+    @media only screen and (max-width: 800px) {
+        flex-flow: column nowrap;
+    }
 `
 
 export const HomeNews = styled.div`
@@ -17,6 +21,10 @@ export const HomeNews = styled.div`
     flex-grow: 3;
 
     margin-right: 10vw;
+
+    @media only screen and (max-width: 800px) {
+        margin-right: 0;
+    }
 `
 
 export const HomeInfos = styled.div`

@@ -7,17 +7,22 @@ import {
     MenuMobile,
     MobileLink,
     MobileDrop,
-    MenuDrop
+    MenuDrop,
+    MenuDropLink
 } from './style';
 
-
 const NavLinks = () => {
+    let [logged, setLogged] = useState(isAuthenticated());
+
     let menu = useRef()
     let [menuAnimation, setMenuAnimation] = useState();
     let [menuState, setMenuState] = useState(false);
-    let [tl] = useState(new TimelineLite({ paused: true }));
-    let [logged, setLogged] = useState(isAuthenticated());
+    let [tl1] = useState(new TimelineLite({ paused: true }));
+    
+    let menuDropUser = useRef();
+    let [menuDropUserAnimation, setMenuDropUserAnimation] = useState();
     let [dropActive, setDropActive] = useState(false);
+    let [tl2] = useState(new TimelineLite({ paused: true }));
 
     if(!logged && isAuthenticated()) {
         setLogged(true);
@@ -25,9 +30,15 @@ const NavLinks = () => {
 
     useEffect(() => {
         setMenuAnimation(
-            tl
+            tl1
             .from(menu, 0, { autoAlpha: 0 })
             .from(menu, 1, { left: 850 })
+            .pause()
+        )
+
+        setMenuDropUserAnimation(
+            tl2
+            .from(menuDropUser, 0.5, { height: 0, autoAlpha: 0 })
             .pause()
         )
     // eslint-disable-next-line
@@ -46,8 +57,10 @@ const NavLinks = () => {
     const handleClickDrop = () => {
         if(dropActive) {
             setDropActive(false);
+            menuDropUserAnimation.reverse();
         } else {
             setDropActive(true);
+            menuDropUserAnimation.play();
         }
     }
 
@@ -61,8 +74,27 @@ const NavLinks = () => {
                     >
                         <div>{localStorage.name}</div>
                     </MobileDrop>
-                    <MenuDrop>
-
+                    <MenuDrop
+                        ref={div => menuDropUser = div}
+                    >
+                        <MenuDropLink 
+                            to={"/user/" + localStorage.id} 
+                            onClick={() => menuAnimation.reverse()}
+                        >
+                            Perfil
+                        </MenuDropLink>
+                        <MenuDropLink 
+                            to="/user/config"
+                            onClick={() => menuAnimation.reverse()}
+                        >
+                            Configurações
+                        </MenuDropLink>
+                        <MenuDropLink 
+                            to="/user/logout"
+                            onClick={() => menuAnimation.reverse()}
+                        >
+                            Sair
+                        </MenuDropLink>
                     </MenuDrop>
                 </>
             )
@@ -73,10 +105,28 @@ const NavLinks = () => {
                         Active={dropActive}
                         onClick={() => handleClickDrop()}
                     >
-                        Entrar / Registrar
+                        <div>Entrar / Registrar</div>
                     </MobileDrop>
-                    <MenuDrop>
-
+                    <MenuDrop
+                        ref={div => menuDropUser = div}
+                    >
+                        <MenuDropLink 
+                            to="/user/signin"
+                            onClick={() => menuAnimation.reverse()}
+                        >
+                            Entrar
+                        </MenuDropLink>
+                        <MenuDropLink 
+                            to="/user/register"
+                            onClick={() => menuAnimation.reverse()}
+                        >
+                            Registrar-se
+                        </MenuDropLink>
+                        <MenuDropLink 
+                            to="/user/PassRecover"
+                        >
+                            Recuperar Senha
+                        </MenuDropLink>
                     </MenuDrop>
                 </>
             )
@@ -87,17 +137,17 @@ const NavLinks = () => {
         <>
             <MenuMobileIcon onClick={() => handleClick()} />
             <MenuMobile ref={div => menu = div}>
-                <MobileLink exact to="/" activeClassName="active">
+                <MobileLink exact to="/" activeClassName="active" onClick={() => menuAnimation.reverse()}>
                     <span>Ínicio</span>
                 </MobileLink>
                 {userMenu()}
-                <MobileLink exact to="/news" activeClassName="active">
+                <MobileLink exact to="/news" activeClassName="active" onClick={() => menuAnimation.reverse()}>
                     <span>news</span>
                 </MobileLink>
-                <MobileLink exact to="/codes" activeClassName="active">
+                <MobileLink exact to="/codes" activeClassName="active" onClick={() => menuAnimation.reverse()}>
                     <span>codes</span>
                 </MobileLink>
-                <MobileLink exact to="/teste" activeClassName="active">
+                <MobileLink exact to="/teste" activeClassName="active" onClick={() => menuAnimation.reverse()}>
                     <span>Tetesteste</span>
                 </MobileLink>
             </MenuMobile>

@@ -352,5 +352,23 @@ export const MobileDrop = styled.div`
 `
 
 export const MenuDrop = styled.div`
+    width: 100%;
+
     display: flex;
+    align-items: center;
+    flex-flow: column;
+
+    background-color: var(--color-1);
+`
+
+export const MenuDropLink = styled(Link)`
+    display: flex;
+    justify-content: center;
+
+    width: 100%;
+    padding: 10px 0;
+
+    font-size: 18px;
+    color: #fff;
+    transition: 0.4s;
 `
