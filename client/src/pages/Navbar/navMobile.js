@@ -142,13 +142,13 @@ const NavLinks = () => {
                 </MobileLink>
                 {userMenu()}
                 <MobileLink exact to="/news" activeClassName="active" onClick={() => menuAnimation.reverse()}>
-                    <span>news</span>
+                    <span>Nóticias</span>
                 </MobileLink>
-                <MobileLink exact to="/codes" activeClassName="active" onClick={() => menuAnimation.reverse()}>
-                    <span>codes</span>
+                <MobileLink exact to="/stories" activeClassName="active" onClick={() => menuAnimation.reverse()}>
+                    <span>Carreiras</span>
                 </MobileLink>
-                <MobileLink exact to="/teste" activeClassName="active" onClick={() => menuAnimation.reverse()}>
-                    <span>Tetesteste</span>
+                <MobileLink exact to="/championships" activeClassName="active" onClick={() => menuAnimation.reverse()}>
+                    <span>Campeoanatos</span>
                 </MobileLink>
             </MenuMobile>
         </>

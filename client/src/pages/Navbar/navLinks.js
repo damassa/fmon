@@ -45,7 +45,7 @@ const NavLinks = () => {
                         <DropLink to="/championships/lfm">LFM</DropLink>
                     </NavDrop>
                 </NavLinkWrapper>
-                <NavLinkStyled to="/ultimate">Carreiras</NavLinkStyled>
+                <NavLinkStyled to="/stories">Carreiras</NavLinkStyled>
                 <NavLinkStyled to="/news">Notícias</NavLinkStyled>
                 <NavLinkStyled to="/store">Loja</NavLinkStyled>
             </MenuLinks>
