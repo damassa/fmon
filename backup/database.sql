@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Tempo de geração: 29/11/2019 às 11:42
+-- Tempo de geração: 04/12/2019 às 11:46
 -- Versão do servidor: 5.7.28
 -- Versão do PHP: 7.3.6
 
@@ -66,6 +66,24 @@ CREATE TABLE `news_likes` (
 -- --------------------------------------------------------
 
 --
+-- Estrutura para tabela `stories`
+--
+
+CREATE TABLE `stories` (
+  `id` int(11) NOT NULL,
+  `title` mediumtext NOT NULL,
+  `category` int(11) NOT NULL,
+  `user` int(11) NOT NULL,
+  `image` int(11) NOT NULL,
+  `views` int(11) NOT NULL DEFAULT '0',
+  `finished` tinyint(1) NOT NULL DEFAULT '0',
+  `createdAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updatedAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
 -- Estrutura para tabela `users`
 --
 
@@ -106,6 +124,12 @@ ALTER TABLE `news_likes`
   ADD UNIQUE KEY `CLUSTERED` (`user`,`news`);
 
 --
+-- Índices de tabela `stories`
+--
+ALTER TABLE `stories`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Índices de tabela `users`
 --
 ALTER TABLE `users`
@@ -133,6 +157,12 @@ ALTER TABLE `news`
 -- AUTO_INCREMENT de tabela `news_likes`
 --
 ALTER TABLE `news_likes`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de tabela `stories`
+--
+ALTER TABLE `stories`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
