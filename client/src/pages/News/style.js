@@ -33,6 +33,7 @@ export const NewsImage = styled.div`
     height: 300px;
 
     background-image: url(${props => props.Image});
+    background-color: #787878;
     background-size: cover;
     background-position: center top;
 
@@ -360,6 +361,7 @@ export const NoticeImage = styled.div`
     margin: 2vh 20%;
 
     background-image: url(${props => props.Image});
+    background-color: #787878;
     background-size: cover;
     background-position: center top;
     background-repeat: no-repeat;

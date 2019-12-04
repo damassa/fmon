@@ -87,6 +87,7 @@ exports.userById = (req, res, next, id) => {
             })
         }
         req.user = values[0];
+        req.user.password = null;
         next();
     });
 }

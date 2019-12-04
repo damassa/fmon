@@ -1,11 +1,9 @@
 const formidable = require('formidable');
 const fs = require('fs');
-const format = require('date-format'); 
 
 const db = require('../../database');
 
 require('dotenv').config();
-
 
 exports.createNews = (req, res) => {
     let form = new formidable.IncomingForm();
