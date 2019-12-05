@@ -40,6 +40,7 @@ exports.createNews = (req, res) => {
             }
 
             image64 = fs.readFileSync(image.path, 'base64');
+            image64 = 'data:image/jpeg;base64,' + image64;
         } else {
             return res.status(400).json({
                 error: 'Image is required'

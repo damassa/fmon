@@ -63,7 +63,6 @@ const News = () => {
                     setNews(values);
                     setLoadingNews(false);
 
-                    console.log(limitNews);
                     if(limitNews > values.length) {
                         setEndNews(true);
                     }
@@ -151,7 +150,7 @@ const News = () => {
                     <NewsCards>
                         {news.map((element, index) => (
                             <NewsCard to={"/news/read/" + element.id} key={index}>
-                                <NewsImage Image={"data:image/png;base64," + element.image}/>
+                                <NewsImage Image={element.image}/>
                                 <NewsTitle>{element.title}</NewsTitle>
                                 <NewsInfos>
                                     <div>

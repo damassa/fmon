@@ -37,6 +37,7 @@ exports.createStorie = (req, res) => {
             }
 
             image64 = fs.readFileSync(image.path, 'base64');
+            image64 = 'data:image/jpeg;base64,' + image64;
         } else {
             return res.status(400).json({
                 error: 'Image is required'
@@ -66,12 +67,13 @@ exports.createStorie = (req, res) => {
 
 exports.listStories = (req, res) => {
     let order = req.body.order ? req.body.order : 'desc';
-    let sortBy = req.body.sortBy ? req.body.sortBy : 'createdAt';
+    let sortBy = req.body.sortBy ? req.body.sortBy : 'updatedAt';
     let limit = req.body.limit ? req.body.limit : 4;
 
-    let sql = `SELECT A.id, A.title, B.name as 'authorName', A.image, A.createdAt, A.views
+    let sql = `SELECT A.id, A.title, B.name as 'authorName', C.image, A.updatedAt, A.views, A.finished
     FROM stories as A 
     LEFT JOIN users as B ON A.author = B.id 
+    LEFT JOIN images as C ON A.image = C.id
     GROUP BY A.id
     ORDER BY A.${sortBy} ${order}
     LIMIT 0, ${limit}`;

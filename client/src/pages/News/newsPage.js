@@ -121,7 +121,7 @@ const NewsPage = (props) => {
                     <NoticeDate>
                         Criado {formatRelative(new Date(news.createdAt), new Date(),{ locale: ptBR })}
                     </NoticeDate>
-                    <NoticeImage Image={"data:image/png;base64," + news.image} />
+                    <NoticeImage Image={news.image} />
                 </NoticeHeader>
                 <NoticeBody dangerouslySetInnerHTML={{ __html: news.text }}>
                 </NoticeBody>   

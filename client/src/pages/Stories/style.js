@@ -1,8 +1,13 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 import purpleBg         from '../../assets/news/purple-bg.png';
 import leftEffect       from '../../assets/news/left-effect.svg';
 import rightEffect      from '../../assets/news/right-effect.svg';
+import userIcon         from '../../assets/icons/user-color.svg';
+import dateIcon         from '../../assets/icons/date.svg';
+import eyeIcon          from '../../assets/icons/eye.svg';
+import starIcon         from '../../assets/icons/star.svg';
 
 export const StoriesWrapper = styled.div`
     width: 100%;
@@ -77,6 +82,7 @@ export const StoriesHeaderSubTitle = styled.div`
 export const StoriesBody = styled.div`
     display: flex;
     flex-flow: row;
+    justify-content: space-between;
     
     width: 100%;
     margin: 5vh 0;
@@ -85,19 +91,18 @@ export const StoriesBody = styled.div`
 export const ListStories = styled.div`
     display: flex;
     flex-flow: column;
-    justify-content: center;
-    flex-grow: 3;
+    justify-content: flex-start;
 
-    margin-right: 5vw;
+    width: 65%;
 `
 
 export const RightMenu = styled.div`
     display: flex;
     flex-flow: column nowrap;
     align-items: center;
-    flex-grow: 2;
 
     margin-bottom: 5vh;
+    width: 25%;
     
     color: #fff;
 `
@@ -120,20 +125,25 @@ export const LastStories = styled.div`
     margin-bottom: 4vh;
 `
 
-export const StorieCard = styled.div`
+export const StorieCard = styled(Link)`
     display: flex;
     flex-flow: column;
-    align-items: center;
+    align-items: flex-start;
     
     width: 45%;
     margin-bottom: 3vh;
 
     &.small {
         width: 30%;
+        align-items: center;
     }
 
     &.small section {
         height: 125px;
+    }
+
+    &.small div {
+        text-align: center;
     }
 `
 
@@ -142,12 +152,13 @@ export const StorieCardImage = styled.section`
     height: 200px;
 
     background-image: url(${props => props.Image});
+    background-color: ${props => props.Image ? 'transparent' : '#787878'};
     background-size: cover;
     background-position: top center;
 `
 
 export const StorieCardTitle = styled.div`
-    font-size: 16px;
+    font-size: 18px;
     font-weight: bold;
     color: var(--color-1);
 
@@ -189,4 +200,117 @@ export const ListTitle = styled.div`
 
     margin-bottom: 2vh;
     padding-bottom: 1vh;
+`
+
+export const StorieCardInfos = styled.div`
+    display: flex;
+    flex-flow: row;
+    justify-content: space-between;
+
+    width: 100%;
+
+    & div {
+        display: flex;
+        flex-flow: row;
+        justify-content: space-between;
+    }
+
+    & div span:first-child {
+        margin-right: 10px;
+
+        &:after {
+            content: "|";
+            margin-left: 10px;
+        }
+    }
+`
+
+export const StorieInfosSpan = styled.span`
+    display: flex;
+    align-items: center;
+
+    height: 18px;
+    padding-left: 20px;
+    
+    font-size: 14px;
+    color: var(--color-1);
+
+    background-size: contain;
+    background-position: center left;
+    background-repeat: no-repeat;
+`
+
+export const StorieInfosAuthor = styled(StorieInfosSpan)`
+    background-image: url(${userIcon});
+`
+
+export const StorieInfosDate = styled(StorieInfosSpan)`
+    background-image: url(${dateIcon});
+`
+
+export const StorieInfosViews = styled(StorieInfosSpan)`
+    background-image: url(${eyeIcon});
+`
+
+export const StorieInfosRating = styled(StorieInfosSpan)`
+    background-image: url(${starIcon});
+`
+
+export const StorieEndAlert = styled.div`
+    color: var(--color-1);
+    font-size: 18px;
+    
+    margin: 2vh 0;
+`
+
+export const StorieButtonWrapper = styled.div`
+    display: flex;
+    justify-content: center;
+
+    width: 100%;
+`
+
+export const MenuCardLink = styled(Link)`
+    font-size: 14px;
+    color: var(--color-1);
+
+    margin-bottom: 2vh;
+`
+
+export const MenuCardWrapper = styled(Link)`
+    display: flex;
+    flex-flow: column nowrap;
+
+    margin: 1vh 0;
+
+    & span:hover {
+        color: var(--color-1);
+    }
+`
+
+export const MenuCardText = styled.span`
+    font-size: 16px;
+    color: #222;
+    transition: 0.4s;
+`
+
+export const MenuCardUnder = styled.div`
+    display: flex;
+    flex-flow: row nowrap;
+
+    padding: 1vh 0;
+`
+
+export const MenuCardSubText = styled.span`
+    font-size: 14px;
+    color: #666;
+
+    &:first-child {
+        margin-right: 20px;
+    } 
+
+    &:first-child:after {
+        content: "|";
+        padding-left: 20px;
+    }
 `
