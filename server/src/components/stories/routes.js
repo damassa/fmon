@@ -15,7 +15,7 @@ const {
 } = require('./Controller');
 
 router.post("/stories/create/:userId", requireSignin, isAuth, createStorie);
-router.post("/stories/", requireSignin, isAuth, listStories);
+router.post("/stories/", listStories);
 
 router.param('userId', userById);
 router.param('storieId', storieById);

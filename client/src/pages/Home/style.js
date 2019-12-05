@@ -30,10 +30,10 @@ export const HomeNews = styled.div`
 export const HomeInfos = styled.div`
     display: flex;
     flex-flow: column nowrap;
-    justify-content: center;
+    align-items: center;
     flex-grow: 2;
     
-    background-color: blue;
+    background-color: var(--color-1);
     color: #fff;
 `
 

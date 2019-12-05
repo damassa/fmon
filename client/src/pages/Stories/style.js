@@ -108,6 +108,16 @@ export const BestStories = styled.div`
     justify-content: space-between;
     
     width: 100%;
+    margin-bottom: 4vh;
+`
+
+export const LastStories = styled.div`
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    
+    width: 100%;
+    margin-bottom: 4vh;
 `
 
 export const StorieCard = styled.div`
@@ -115,7 +125,8 @@ export const StorieCard = styled.div`
     flex-flow: column;
     align-items: center;
     
-    width: 40%;
+    width: 45%;
+    margin-bottom: 3vh;
 
     &.small {
         width: 30%;
@@ -132,7 +143,7 @@ export const StorieCardImage = styled.section`
 
     background-image: url(${props => props.Image});
     background-size: cover;
-    background-position: center;
+    background-position: top center;
 `
 
 export const StorieCardTitle = styled.div`
@@ -167,4 +178,15 @@ export const SearchResult = styled.div`
 
     margin: 2vh 0;
     color: #000;
+`
+
+export const ListTitle = styled.div`
+    font-size: 24px;
+    font-weight: bold;
+    color: var(--color-1);
+
+    border-bottom: 1px solid var(--color-1);
+
+    margin-bottom: 2vh;
+    padding-bottom: 1vh;
 `

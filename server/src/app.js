@@ -10,6 +10,7 @@ require('dotenv').config();
 const userRoutes    = require('./components/user/routes');
 const newsRoutes    = require('./components/news/routes');
 const storiesRoutes = require('./components/stories/routes');
+const imagesRoutes  = require('./components/images/routes');
 
 //App
 const app = express();
@@ -24,6 +25,7 @@ app.use(cors());
 app.use("/api", userRoutes);
 app.use("/api", newsRoutes);
 app.use("/api", storiesRoutes);
+app.use("/api", imagesRoutes);
 
 //Running app
 const port = process.env.PORT || 4000;

@@ -51,7 +51,7 @@ exports.createStorie = (req, res) => {
                 })
             }
 
-            sql = `INSERT INTO stories (title, category, user, image) VALUES (?, ?, ?, ?)`;
+            sql = `INSERT INTO stories (title, category, author, image) VALUES (?, ?, ?, ?)`;
             db.connect.query(sql, [title, category, req.user.id, values.insertId], (err, val) => {
                 if(err) {
                     return res.status(400).json({
@@ -69,11 +69,9 @@ exports.listStories = (req, res) => {
     let sortBy = req.body.sortBy ? req.body.sortBy : 'createdAt';
     let limit = req.body.limit ? req.body.limit : 4;
 
-    let sql = `SELECT A.id, A.title, C.image, B.name as 'authorName', A.createdAt, COUNT(D.id) as 'likes', A.views
+    let sql = `SELECT A.id, A.title, B.name as 'authorName', A.image, A.createdAt, A.views
     FROM stories as A 
     LEFT JOIN users as B ON A.author = B.id 
-    LEFT JOIN images as C ON A.image = C.id 
-    LEFT JOIN news_likes as D ON A.id = D.news
     GROUP BY A.id
     ORDER BY A.${sortBy} ${order}
     LIMIT 0, ${limit}`;
