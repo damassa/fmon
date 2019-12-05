@@ -1,5 +1,7 @@
 # [Football Manager Online](https://fmon.org) [![MIT License](https://img.shields.io/badge/license-MIT-lightgrey.svg)](https://github.com/lpeil/fmon/blob/master/LICENSE)
 
+![Preview](https://i.imgur.com/5Ty4CMK.jpg)
+
 The FMON is the biggest site of Football Manager E-Sport, and this project is the new version, migrating to Node.JS and React.
 
 ## Quick Start
