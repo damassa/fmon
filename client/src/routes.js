@@ -16,6 +16,7 @@ import NewsPage         from './pages/News/newsPage';
 import CreateNews       from './pages/News/createNews';
 
 import Stories          from './pages/Stories';
+import StoriesPage      from './pages/Stories/storiePage';
 
 const Routes = () => {
     return (
@@ -36,6 +37,7 @@ const Routes = () => {
                     <Route path="/news/read/:id"    exact={true} component={NewsPage} />
 
                     <Route path="/stories/"         exact={true} component={Stories} />
+                    <Route path="/stories/read/:id" exact={true} component={StoriesPage} />
                 </Switch>
             </Body>
         </BrowserRouter>

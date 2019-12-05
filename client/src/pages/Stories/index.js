@@ -43,7 +43,6 @@ import {
 
 const Stories = () => {
     let [lastStories, setLastStories] = useState(FastLoad);
-    let [mostViewed, setMostViewed] = useState(FastLoad);
     let [limitStories, setLimitStories] = useState(4);
     let [loadingStories, setLoadingStories] = useState(false);
     let [endStories, setEndStories] = useState(false);

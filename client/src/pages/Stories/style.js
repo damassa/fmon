@@ -61,6 +61,18 @@ export const StoriesHeader = styled.div`
     }
 `
 
+export const StoriesHeaderAlt = styled(StoriesHeader)`
+    height: 12.5vh;
+
+    &:before {
+        height: calc(100px + 12.5vh);
+    }
+
+    &:after {
+        height: calc(100px + 27.5vh);
+    }
+`
+
 export const StoriesHeaderText = styled.div`
     display: flex;
     flex-flow: column nowrap;
@@ -312,5 +324,65 @@ export const MenuCardSubText = styled.span`
     &:first-child:after {
         content: "|";
         padding-left: 20px;
+    }
+`
+
+export const StoriesPageBody = styled.div`
+    width: 100%;
+
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+`
+
+export const StorieHeader = styled.div`
+    display: flex;
+    flex-flow: column;
+
+    margin: 5vh 0;
+`
+
+export const StorieHeaderTitle = styled.span`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
+    font-size: 32px;
+    font-weight: bold;
+    color: var(--color-1);
+`
+
+export const StorieAuthor = styled.div`
+    font-size: 18px;
+
+    margin: 1vh 0;
+`
+
+export const StorieDate = styled.div`
+    font-size: 16px;
+    color: #aaa;
+`
+
+export const StorieImage = styled.div`
+    height: 40vh;
+    max-width: 60%;
+
+    margin: 2vh 20%;
+
+    background-image: url(${props => props.Image});
+    background-color: #787878;
+    background-size: cover;
+    background-position: center top;
+    background-repeat: no-repeat;
+
+    @media only screen and (max-width: 850px) {
+        width: 100%;
+        max-width: 100%;
+        margin: 2vh 0;
+    }
+
+    @media only screen and (max-width: 500px) {
+        height: 20vh;
     }
 `
